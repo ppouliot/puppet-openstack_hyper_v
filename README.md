@@ -12,7 +12,7 @@ Basic usage
 
 To configure windows/hyper-v compute server
 
-class {'windows': }
+    class {'windows': }
 
 Contributors
 ------------
