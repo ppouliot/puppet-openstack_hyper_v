@@ -1,0 +1,1 @@
+Set-VMHost –VirtualMachineMigrationAuthenticationType Kerberos

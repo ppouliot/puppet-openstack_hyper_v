@@ -1,0 +1,11 @@
+{
+  "name": "ppouliot-windows",
+  "author": "Peter J. Pouliot",
+  "description": "Starting Point for building openstack windows compute nodes\n",
+  "license": "Apache",
+  "project_page": "",
+  "source": "",
+  "summary": "This is the starting point for building windows/hyper-v openstack compute nodes.  The goal is currently to have both packaged and from source options. Use at your own risk.",
+  "version": ".001",
+  "dependencies": []
+}
