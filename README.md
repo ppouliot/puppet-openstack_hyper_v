@@ -10,7 +10,7 @@ This is still a work in progress.
 Basic usage
 -----------
 
-To install the pxe server
+To configure windows/hyper-v compute server
 
 class {'windows': }
 
