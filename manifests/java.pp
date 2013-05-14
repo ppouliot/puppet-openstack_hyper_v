@@ -23,7 +23,7 @@ class windows::java{
     file => $java_file,
   }
 
-  package { 'Java(TM) 7 Update 17':
+  package { 'Java 7 Update 17':
     ensure          => installed,
     source          => "${::temp}\\${java_file}",
     provider        => 'windows',

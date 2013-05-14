@@ -18,7 +18,7 @@ class windows::notepadplusplus {
     file => $notepadpp_file,
   }
 
-  package { 'Notepad-Plus-Plus-msi':
+  package { 'Notepad++':
     ensure          => installed,
     source          => "${::temp}\\${notepadpp_file}",
     provider        => windows,

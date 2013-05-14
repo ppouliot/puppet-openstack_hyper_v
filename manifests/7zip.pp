@@ -20,7 +20,7 @@ class windows::7zip(
   }
 
 
-  package { '7z930-x64':
+  package { '7-Zip 9.30 (x64 edition)':
     ensure   => installed,
     source   => "${::temp}\\${file}",
     provider => windows,

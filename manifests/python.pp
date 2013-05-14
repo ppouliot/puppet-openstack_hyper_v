@@ -18,7 +18,7 @@ class windows::python {
     file => $py_file,
   }
 
-  package { 'Python-2.7.3':
+  package { 'Python 2.7.3':
     ensure          => installed,
     source          => "${::temp}\\python-2.7.3.msi",
     provider        => windows,
