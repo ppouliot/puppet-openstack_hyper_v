@@ -16,7 +16,7 @@ class windows::pywin32{
     file => $pywin32_file,
   }
 
-  package { 'Pywin32-217-py27':
+  package { 'Python 2.7 pywin32-217':
     ensure          => installed,
     source          => "${::temp}\\${pywin32_file}",
     provider        => windows,

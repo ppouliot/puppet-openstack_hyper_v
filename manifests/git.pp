@@ -17,7 +17,7 @@ class windows::git{
     file => $git_file,
   }
 
-  package { 'Git-1.8.0':
+  package { 'Git version 1.8.0-preview201221022':
     ensure          => installed,
     source          => "${::temp}\\${git_file}",
     provider        => 'windows',

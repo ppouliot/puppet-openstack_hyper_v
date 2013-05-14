@@ -19,7 +19,7 @@ class windows::google_chrome {
     file => $chrome_file,
   }
 
-  package { 'GoogleChromeStandaloneEnterprise':
+  package { 'Google Chrome':
     ensure          => installed,
     source          => "${::temp}\\${chrome_file}",
     provider        => windows,
