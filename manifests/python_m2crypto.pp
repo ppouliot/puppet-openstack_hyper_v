@@ -16,11 +16,11 @@ class windows::python_m2crypto{
     file => $m2crypto_file,
   }
 
-  package { 'python-m2crypto.msi':
+  package { 'Python 2.7 M2Crypto-0.21.1':
     ensure          => installed,
     source          => "${::temp}\\${m2crypto_file}",
     provider        => windows,
     install_options => '/PASSIVE',
-    require         => [Commands::Download['m2crypto.msi'], Package['Python-2.7.3']],
+    require         => [Commands::Download['m2crypto.msi'], Package['Python 2.7.3']],
   }
 }

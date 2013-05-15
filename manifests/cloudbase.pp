@@ -11,7 +11,7 @@ class windows::cloudbase {
   $admin_pwd            = 'openstack'
   $devstack             = '10.21.7.51'
   $cb_url               = 'http://www.cloudbase.it/downloads'
-  $compute_file         = 'HyperVNovaCompute_Beta.msi'
+  $compute_file         = 'HyperVNovaCompute_Grizzly.msi'
   $installdir           = 'C:\OpenStack\Nova'
   $sql                  = $devstack
   $sql_user             = 'admin'
@@ -32,7 +32,7 @@ class windows::cloudbase {
     file => $compute_file,
   }
 
-  package { 'Grizzly-Beta':
+  package { 'OpenStack Hyper-V Nova Compute 2013.1':
     ensure          => installed,
     source          => "${::temp}\\${compute_file}",
     provider        => windows,

@@ -16,7 +16,7 @@ class windows::vexasoftcmdlet{
     file => $vexasoft_file,
   }
 
-  package { 'Vexasoft_Cmdlet_Library_x64.msi':
+  package { 'VexasoftCmdletLibrary_x64':
     ensure   => installed,
     source   => "${::temp}\\${vexasoft_file}",
     provider => windows,

@@ -100,7 +100,7 @@ class windows::commands{
       command => "7z.exe x ${::temp}\\${archivefile}",
       path    => "${programw6432}\\7-Zip;${::path}",
       cwd     => $::temp,
-      require => Package['7z930-x64'],
+      require => Package['7-Zip 9.30 (x64 edition)'],
     }
   }
 }
