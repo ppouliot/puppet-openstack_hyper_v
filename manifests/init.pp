@@ -36,7 +36,7 @@ class windows {
   class { 'windows::freerdp': }
   #class {'windows::cloudbase': }
   class { 'windows::python': }
-  class { 'windows::python-m2crypto': }
+  class { 'windows::python_m2crypto': }
   #class { 'windows::python-mysql': }
   #class { 'windows::pywin32': }
   #class { 'windows::easyinstall': }

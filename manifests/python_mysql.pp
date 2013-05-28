@@ -16,7 +16,7 @@ class windows::python_mysql {
     file => $pymysql_file,
   }
 
-  package { 'Mysql-Python-1.2.3-win32-py27.exe':
+  package { 'Python 2.7 MySQL-python-1.2.3':
     ensure          => installed,
     source          => "${::temp}\\python-2.7.3.msi",
     provider        => windows,

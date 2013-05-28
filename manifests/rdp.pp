@@ -15,7 +15,7 @@ class windows::rdp{
 
   exec { 'set_rdp_supported_clients':
     command => 'powershell.exe -executionpolicy remotesigned -Command Set-RemoteDesktopConfig -Enable -AllowOlderClients',
-    require => Package['Vexasoft_Cmdlet_Library_x64.msi'],
+    require => Package['VexasoftCmdletLibrary_x64'],
   }
 
 }
