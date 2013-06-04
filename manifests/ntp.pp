@@ -13,7 +13,7 @@ class windows::ntp {
     $timezone   = 'Eastern Standard Time'
 
   exec {'set_time_zone':
-    command => "tzutil.exe /S \'${timezone}\'",
+    command => "tzutil.exe /s \"${timezone}\"",
   }
 
   service { 'w32time':
