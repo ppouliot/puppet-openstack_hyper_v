@@ -37,14 +37,14 @@ class windows {
   #class {'windows::cloudbase': }
 # Begin Python Stack
   class { 'windows::python': }
-  class { 'windows::python_m2crypto': }
+  class { 'windows::python::m2crypto': }
 # Classes extracting installers to %TEMP%\PLATLIB
-  class { 'windows::python_mysql': }
-  class { 'windows::pycrypto': }
-  class { 'windows::pywin32': }
-  class { 'windows::greenlet': }
-  class { 'windows::lxml': }
-  class { 'windows::easyinstall': }
-  class { 'windows::pip': }
+  class { 'windows::python::mysql_python': }
+  class { 'windows::python::pycrypto': }
+  class { 'windows::python::pywin32': }
+  class { 'windows::python::greenlet': }
+  class { 'windows::python::lxml': }
+  class { 'windows::python::easyinstall': }
+  class { 'windows::python::pip': }
 
 }
