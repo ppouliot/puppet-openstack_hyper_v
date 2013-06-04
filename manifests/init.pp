@@ -35,10 +35,16 @@ class windows {
   #class { 'windows::visualcplusplus2012': }
   class { 'windows::freerdp': }
   #class {'windows::cloudbase': }
+# Begin Python Stack
   class { 'windows::python': }
   class { 'windows::python_m2crypto': }
-  #class { 'windows::python-mysql': }
-  #class { 'windows::pywin32': }
-  #class { 'windows::easyinstall': }
+# Classes extracting installers to %TEMP%\PLATLIB
+  class { 'windows::python_mysql': }
+  class { 'windows::pycrypto': }
+  class { 'windows::pywin32': }
+  class { 'windows::greenlet': }
+  class { 'windows::lxml': }
+  class { 'windows::easyinstall': }
+  class { 'windows::pip': }
 
 }

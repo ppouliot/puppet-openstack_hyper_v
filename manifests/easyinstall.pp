@@ -18,6 +18,6 @@ class windows::easyinstall{
 
   exec { 'easy_install_distribute_setup':
     command   => "C:/Python27/python.exe ${::temp}/distribute_setup.py",
-    require   => Class['windows::python', 'windows::pywin32','windows::python-mysql'],
+    require   => Class['windows::python', 'windows::pywin32','windows::python_mysql'],
   }
 }

@@ -1,4 +1,4 @@
-# Class: windows::python_mysql
+# Class: windows::pycrypto
 #
 # This module downloads then installs Python Mysql Binaries
 #
@@ -7,17 +7,17 @@
 # Actions:
 #
 
-class windows::python_mysql {
-  $pymysql_url = 'http://www.codegood.com/download/10/'
-  $pymysql_file = 'MySQL-python-1.2.3.win32-py2.7.exe'
+class windows::pycrypto {
+  $pycrypto_url = 'http://www.voidspace.org.uk/downloads/pycrypto26/pycrypto-2.6.win32-py2.7.exe'
+  $pycrypto_file = 'pycrypto-2.6.win32-py2.7.exe'
 
-  commands::download{'Mysql-Python-1.2.3-win32-py27':
-    url  => $pymysql_url,
-    file => $pymysql_file,
+  commands::download{'pycrypto-2.6.win32-py27':
+    url  => $pycrypto_url,
+    file => $pycrypto_file,
   }
 
-  commands::extract_archive{'Extract_PyMySQL':
-    archivefile => $pymysql_file,
+  commands::extract_archive{'Extract_PyCrypto':
+    archivefile => $pycrypto_file,
   }
 
 #  exec { 'Move_PyMySQL_Files_To_SitePackages':
@@ -26,7 +26,7 @@ class windows::python_mysql {
 #  }
 #  package { 'Python 2.7 MySQL-python-1.2.3':
 #    ensure          => installed,
-#    source          => "${::temp}\\${pymysql_file}",
+#    source          => "${::temp}\\${pycrypto_file}",
 #    provider        => windows,
 #    install_options => '/PASSIVE',
 #    require         => Commands::Download['Mysql-Python-1.2.3-win32-py27'],

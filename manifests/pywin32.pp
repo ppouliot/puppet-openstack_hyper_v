@@ -7,22 +7,28 @@
 # Actions:
 #
 
-class windows::pywin32{
-  pywin32_url  = 'http://sourceforge.net/projects/pywin32/files/pywin32/Build%20217/pywin32-217.win32-py2.7.exe/download'
-  pywin32_file = 'pywin32-217.win32-py2.7.exe'
+class windows::pywin32 {
+  $pywin32_url  = 'http://sourceforge.net/projects/pywin32/files/pywin32/Build%20217/pywin32-217.win32-py2.7.exe/download'
+  $pywin32_file = 'pywin32-217.win32-py2.7.exe'
 
   commands::download{'pywin32':
     url  => $pywin32_url,
     file => $pywin32_file,
   }
-
-  package { 'Python 2.7 pywin32-217':
-    ensure          => installed,
-    source          => "${::temp}\\${pywin32_file}",
-    provider        => windows,
-    install_options => '/PASSIVE',
-    require         => Commands::Download['pywin32'],
+  commands::extract_archive{'pywin32':
+    archivefile => $pywin32_file,
   }
+
+
+
+
+#  package { 'Python 2.7 pywin32-217':
+#    ensure          => installed,
+#    source          => "${::temp}\\${pywin32_file}",
+#    provider        => windows,
+#    install_options => '/PASSIVE',
+#    require         => Commands::Download['pywin32'],
+#  }
 
 
 
@@ -40,5 +46,4 @@ class windows::pywin32{
 # exec { 'pywin32_post_install':
 #   command => 'C:/Python27/python.exe C:/Python27/Lib/site-packages/pywin32_postinstall.py -install',
 # }
-
 }
