@@ -14,7 +14,7 @@ class windows::commands{
       path    => $::path,
 # Depreciated: PP -> REmoving to test new Powershell metnod for downloading content. 
 #     command => "powershell.exe -executionpolicy remotesigned -Command Invoke-WebRequest -UseBasicParsing -uri ${url} -OutFile ${file}",
-      command => "powershell.exe -executionpolicy remotesigned -Command (new-object Net.WebClient).DownloadFile(${url},${file})",
+      command => "powershell.exe -executionpolicy remotesigned -Command (new-object Net.WebClient).DownloadFile(\'${url}\',\'${::temp}\\${file}\')",
       creates => "${::temp}\\${file}",
       cwd     => $::temp,
       unless  => "cmd.exe /c if not exist ${::temp}\\${file}",
