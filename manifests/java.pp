@@ -27,7 +27,7 @@ class windows::java{
     ensure          => installed,
     source          => "${::temp}\\${java_file}",
     provider        => 'windows',
-    install_options => ['/s', '/v/qn' ADDLOCAL=jrecore REBOOT=Suppress JAVAUPDATE=0''],
+    install_options => ['/s', '/v/qn', 'ADDLOCAL=jrecore REBOOT=Suppress JAVAUPDATE=0'],
   }
 
 }
