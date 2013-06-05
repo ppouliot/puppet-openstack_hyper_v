@@ -1,4 +1,4 @@
-# Class: windows::ntp
+# Class: windows::base::ntp
 #
 # This class configures NTP and the Timezone for a windows host
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class windows::ntp {
+class windows::base::ntp {
 
     $timeserver = 'bonehed.lcs.mit.edu'
     $timezone   = 'Eastern Standard Time'

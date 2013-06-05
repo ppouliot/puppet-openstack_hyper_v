@@ -1,4 +1,4 @@
-# Class: windows::rdp
+# Class: windows::base::rdp
 #
 # This module enables RDP access to the windows host and allows the more flexible method of connectivity
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class windows::rdp{
+class windows::base::rdp {
 
   exec { 'enable_rdp_connection':
     command => 'powershell.exe -executionpolicy remotesigned -Command (Get-WmiObject win32_TerminalServiceSetting -Namespace root\\cimv2\\TerminalServices).SetAllowTSConnections(1)',

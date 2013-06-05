@@ -14,10 +14,27 @@ To configure windows/hyper-v compute server
 
     class {'windows': }
 
+
+Windows Features
+----------------
+
+To enable a windows feature
+
+windows::enable_feature{"some_windows_feature"}
+
+To remove a windows feature
+
+
+windows::remove_feature{"some_windows_feature"}
+ 
+
 Contributors
 ------------
 
  * Peter Pouliot <peter@pouliot.net>
+ * Octavian Ciuhandu <ociuhandu@cloudbasesolutions.com>
+ * Luis Fernandez Alverez <luis.fernandez.alvarez@cern.ch>
+
 
 Copyright and License
 ---------------------

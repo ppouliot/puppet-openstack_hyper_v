@@ -20,11 +20,13 @@ class windows {
     path => "${powershell_path};${winpath};${::path}",
   }
   class { 'windows::commands': }
-  class { 'windows::ntp': }
-  class { 'windows::disable_firewalls': }
-  class { 'windows::enable_auto_update': }
+  class { 'windows::base::ntp': }
+  class { 'windows::base::disable_firewalls': }
+  class { 'windows::base::enable_auto_update': }
+  class { 'windows::base::rdp': }
+
+  # Tools
   class { 'windows::tools::7zip': }
-  class { 'windows::rdp': }
   class { 'windows::tools::vexasoftcmdlet': }
   class { 'windows::tools::git': }
   # Optional
