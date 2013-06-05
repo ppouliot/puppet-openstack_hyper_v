@@ -8,15 +8,18 @@
 #
 
 class windows::python::mysql_python {
+
   $pymysql_url = 'http://www.codegood.com/download/10/'
   $pymysql_file = 'MySQL-python-1.2.3.win32-py2.7.exe'
 
-  commands::download{'Mysql-Python-1.2.3-win32-py27':
+  Commands::Download['mysql_python'] -> Commands::Extract_archive['mysql_python']
+
+  commands::download{'mysql_python':
     url  => $pymysql_url,
     file => $pymysql_file,
   }
 
-  commands::extract_archive{'Extract_PyMySQL':
+  commands::extract_archive{'mysql_python':
     archivefile => $pymysql_file,
   }
 

@@ -11,6 +11,8 @@ class windows::python::pywin32 {
   $pywin32_url  = 'http://sourceforge.net/projects/pywin32/files/pywin32/Build%20217/pywin32-217.win32-py2.7.exe/download'
   $pywin32_file = 'pywin32-217.win32-py2.7.exe'
 
+  Commands::Download['pywin32'] -> Commands::Extract_archive['pywin32']
+
   commands::download{'pywin32':
     url  => $pywin32_url,
     file => $pywin32_file,

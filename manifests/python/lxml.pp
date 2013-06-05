@@ -12,6 +12,8 @@ class windows::python::lxml{
   $lxml_url   = 'https://pypi.python.org/packages/2.7/l/lxml/lxml-2.3.win32-py2.7.exe#md5=9c02aae672870701377750121f5a6f84'
   $lxml_file = 'lxml-2.3.win32-py2.7.exe'
 
+  Commands::Download['lxml'] -> Commands::Extract_archive['lxml']
+
   commands::download{'lxml':
     url  => $lxml_url,
     file => $lxml_file,

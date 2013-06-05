@@ -23,28 +23,30 @@ class windows {
   class { 'windows::ntp': }
   class { 'windows::disable_firewalls': }
   class { 'windows::enable_auto_update': }
-  class { 'windows::7zip': }
+  class { 'windows::tools::7zip': }
   class { 'windows::rdp': }
-  class { 'windows::vexasoftcmdlet': }
-  class { 'windows::git': }
+  class { 'windows::tools::vexasoftcmdlet': }
+  class { 'windows::tools::git': }
   # Optional
   class { 'windows::java': }
-  class { 'windows::notepadplusplus': }
-  class { 'windows::google_chrome': }
-  #class {' windows::visualcplusplus2010': }
-  #class { 'windows::visualcplusplus2012': }
-  class { 'windows::freerdp': }
-  #class {'windows::cloudbase': }
+  class { 'windows::tools::notepadplusplus': }
+  class { 'windows::tools::google_chrome': }
+  #class {' windows::tools::visualcplusplus2010': }
+  #class { 'windows::tools::visualcplusplus2012': }
+  class { 'windows::tools::freerdp': }
 # Begin Python Stack
   class { 'windows::python': }
   class { 'windows::python::m2crypto': }
 # Classes extracting installers to %TEMP%\PLATLIB
-  class { 'windows::python::mysql_python': }
-  class { 'windows::python::pycrypto': }
-  class { 'windows::python::pywin32': }
-  class { 'windows::python::greenlet': }
-  class { 'windows::python::lxml': }
+# -- Moving to site_packages.pp
+#  class { 'windows::python::mysql_python': }
+#  class { 'windows::python::pycrypto': }
+#  class { 'windows::python::pywin32': }
+#  class { 'windows::python::greenlet': }
+#  class { 'windows::python::lxml': }
+  class { 'windows::python::site_packages': }
   class { 'windows::python::easyinstall': }
   class { 'windows::python::pip': }
+  class { 'windows::openstack::folders':}
 
 }

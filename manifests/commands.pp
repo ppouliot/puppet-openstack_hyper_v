@@ -105,4 +105,5 @@ class windows::commands{
       require => Package['7-Zip 9.30 (x64 edition)'],
     }
   }
+
 }

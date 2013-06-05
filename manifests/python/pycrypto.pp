@@ -11,12 +11,14 @@ class windows::python::pycrypto {
   $pycrypto_url = 'http://www.voidspace.org.uk/downloads/pycrypto26/pycrypto-2.6.win32-py2.7.exe'
   $pycrypto_file = 'pycrypto-2.6.win32-py2.7.exe'
 
-  commands::download{'pycrypto-2.6.win32-py27':
+  Commands::Download['pycrypto'] -> Commands::Extract_archive['pycrypto']
+
+  commands::download{'pycrypto':
     url  => $pycrypto_url,
     file => $pycrypto_file,
   }
 
-  commands::extract_archive{'Extract_PyCrypto':
+  commands::extract_archive{'pycrypto':
     archivefile => $pycrypto_file,
   }
 
