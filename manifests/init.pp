@@ -10,6 +10,19 @@
 
 
 class windows {
+
+  dism { 'Microsoft-Hyper-V':
+    ensure => present,
+  }
+
+  dism { 'Microsoft-Hyper-V-Management-Clients':
+    ensure => present,
+  }
+
+  dism { 'Microsoft-Hyper-V-Management-PowerShell':
+    ensure => present,
+  }
+
   $winpath         = "${::systemroot}\\sysnative;c:\\winpe\\bin;${::path}"
   $powershell_path = "${::systemroot}\\sysnative\\WindowsPowerShell\\v1.0"
   $path            = "${winpath};${powershell_path};${::path}"
