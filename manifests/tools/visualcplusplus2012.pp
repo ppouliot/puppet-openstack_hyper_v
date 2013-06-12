@@ -20,7 +20,6 @@ class windows::tools::visualcplusplus2012{
   package { 'vcredist_x86.exe':
     ensure          => installed,
     source          => "${::temp}\\${vs2012_file}",
-    provider        => windows,
     install_options => ['/PASSIVE'],
     require         => Commands::Download['Visual_Studio_2012_C_Plus_Plus'],
   }

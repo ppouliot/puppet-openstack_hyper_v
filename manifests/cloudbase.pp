@@ -35,7 +35,6 @@ class windows::cloudbase {
   package { 'OpenStack Hyper-V Nova Compute 2013.1':
     ensure          => installed,
     source          => "${::temp}\\${compute_file}",
-    provider        => windows,
     install_options => ['ADDLOCAL=HyperVNovaCompute',
                         'QuantumHyperVAgent',
                         'iSCSISWInitiator',

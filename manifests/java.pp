@@ -26,7 +26,6 @@ class windows::java{
   package { 'Java 7 Update 17':
     ensure          => installed,
     source          => "${::temp}\\${java_file}",
-    provider        => 'windows',
     install_options => ['/s', '/v/qn', 'ADDLOCAL=jrecore REBOOT=Suppress JAVAUPDATE=0'],
   }
 

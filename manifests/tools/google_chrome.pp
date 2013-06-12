@@ -22,7 +22,6 @@ class windows::tools::google_chrome {
   package { 'Google Chrome':
     ensure          => installed,
     source          => "${::temp}\\${chrome_file}",
-    provider        => windows,
     install_options => ['/PASSIVE',],
     require         => Commands::Download['GoogleChrome'],
   }

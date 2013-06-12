@@ -21,7 +21,6 @@ class windows::python {
   package { 'Python 2.7.3':
     ensure          => installed,
     source          => "${::temp}\\python-2.7.3.msi",
-    provider        => windows,
     install_options => ['/PASSIVE',],
     require         => Commands::Download['python.msi'],
   }

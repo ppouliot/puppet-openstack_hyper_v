@@ -29,7 +29,6 @@ class windows::python::pycrypto {
 #  package { 'Python 2.7 MySQL-python-1.2.3':
 #    ensure          => installed,
 #    source          => "${::temp}\\${pycrypto_file}",
-#    provider        => windows,
 #    install_options => '/PASSIVE',
 #    require         => Commands::Download['Mysql-Python-1.2.3-win32-py27'],
 #  }
