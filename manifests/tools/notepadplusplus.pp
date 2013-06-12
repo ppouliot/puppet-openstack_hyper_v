@@ -21,7 +21,6 @@ class windows::tools::notepadplusplus {
   package { 'Notepad++':
     ensure          => installed,
     source          => "${::temp}\\${notepadpp_file}",
-    provider        => windows,
     install_options => ['/S',],
     require         => Commands::Download['Notepad-Plus-Plus'],
   }
