@@ -8,11 +8,11 @@
 #
 
 
-class openstack-hyper-v::commands{
+#class openstack-hyper-v::commands{
   define download($url,$file){
     exec{ $name:
       path    => $::path,
-# Depreciated: PP -> REmoving to test new Powershell metnod for downloading content. 
+# Depreciated: PP -> REmoving to test new Powershell metnod for downloading content.
 #     command => "powershell.exe -executionpolicy remotesigned -Command Invoke-WebRequest -UseBasicParsing -uri ${url} -OutFile ${file}",
       command => "powershell.exe -executionpolicy remotesigned -Command (new-object Net.WebClient).DownloadFile(\'${url}\',\'${::temp}\\${file}\')",
       creates => "${::temp}\\${file}",
@@ -106,4 +106,4 @@ class openstack-hyper-v::commands{
     }
   }
 
-}
+#}

@@ -19,7 +19,8 @@ class openstack-hyper-v {
   Exec{
     path => "${powershell_path};${winpath};${::path}",
   }
-  class { 'openstack-hyper-v::commands': }
+#  class { 'openstack-hyper-v::commands': }
+  include quartermaster::commands
   class { 'openstack-hyper-v::base::ntp': }
   class { 'openstack-hyper-v::base::disable_firewalls': }
   class { 'openstack-hyper-v::base::enable_auto_update': }
