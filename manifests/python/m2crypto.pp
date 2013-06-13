@@ -1,4 +1,4 @@
-# Class: windows::python_m2crypto
+# Class: openstack-hyper-v::python_m2crypto
 #
 # This module downloads then installs the Python M2Crypto MSI
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class windows::python::m2crypto{
+class openstack-hyper-v::python::m2crypto{
   $m2crypto_url  = 'http://chandlerproject.org/pub/Projects/MeTooCrypto/M2Crypto-0.21.1.win32-py2.7.msi'
   $m2crypto_file = 'M2Crypto-0.21.1.win32-py2.7.msi'
 

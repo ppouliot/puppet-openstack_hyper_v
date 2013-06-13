@@ -19,36 +19,36 @@ class windows {
   Exec{
     path => "${powershell_path};${winpath};${::path}",
   }
-  class { 'windows::commands': }
-  class { 'windows::base::ntp': }
-  class { 'windows::base::disable_firewalls': }
-  class { 'windows::base::enable_auto_update': }
-  class { 'windows::base::rdp': }
+  class { 'openstack-hyper-v::commands': }
+  class { 'openstack-hyper-v::base::ntp': }
+  class { 'openstack-hyper-v::base::disable_firewalls': }
+  class { 'openstack-hyper-v::base::enable_auto_update': }
+  class { 'openstack-hyper-v::base::rdp': }
 
   # Tools
-  class { 'windows::tools::7zip': }
-  class { 'windows::tools::vexasoftcmdlet': }
-  class { 'windows::tools::git': }
+  class { 'openstack-hyper-v::tools::7zip': }
+  class { 'openstack-hyper-v::tools::vexasoftcmdlet': }
+  class { 'openstack-hyper-v::tools::git': }
   # Optional
-  class { 'windows::java': }
-  class { 'windows::tools::notepadplusplus': }
-  class { 'windows::tools::google_chrome': }
-  #class {' windows::tools::visualcplusplus2010': }
-  #class { 'windows::tools::visualcplusplus2012': }
-  class { 'windows::tools::freerdp': }
+  class { 'openstack-hyper-v::java': }
+  class { 'openstack-hyper-v::tools::notepadplusplus': }
+  class { 'openstack-hyper-v::tools::google_chrome': }
+  #class {' openstack-hyper-v::tools::visualcplusplus2010': }
+  #class { 'openstack-hyper-v::tools::visualcplusplus2012': }
+  class { 'openstack-hyper-v::tools::freerdp': }
 # Begin Python Stack
-  class { 'windows::python': }
-  class { 'windows::python::m2crypto': }
+  class { 'openstack-hyper-v::python': }
+  class { 'openstack-hyper-v::python::m2crypto': }
 # Classes extracting installers to %TEMP%\PLATLIB
 # -- Moving to site_packages.pp
-#  class { 'windows::python::mysql_python': }
-#  class { 'windows::python::pycrypto': }
-#  class { 'windows::python::pywin32': }
-#  class { 'windows::python::greenlet': }
-#  class { 'windows::python::lxml': }
-  class { 'windows::python::site_packages': }
-  class { 'windows::python::easyinstall': }
-  class { 'windows::python::pip': }
-  class { 'windows::openstack::folders':}
+#  class { 'openstack-hyper-v::python::mysql_python': }
+#  class { 'openstack-hyper-v::python::pycrypto': }
+#  class { 'openstack-hyper-v::python::pywin32': }
+#  class { 'openstack-hyper-v::python::greenlet': }
+#  class { 'openstack-hyper-v::python::lxml': }
+  class { 'openstack-hyper-v::python::site_packages': }
+  class { 'openstack-hyper-v::python::easyinstall': }
+  class { 'openstack-hyper-v::python::pip': }
+  class { 'openstack-hyper-v::openstack::folders':}
 
 }

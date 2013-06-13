@@ -1,4 +1,4 @@
-# Class: windows::tools::vexasoftcmdlet
+# Class: openstack-hyper-v::tools::vexasoftcmdlet
 #
 # This module downloads then installs the Vexasoft RDP Powershell cmdlet
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class windows::tools::vexasoftcmdlet{
+class openstack-hyper-v::tools::vexasoftcmdlet{
   $vexasoft_url  = 'http://cdn.shopify.com/s/files/1/0206/6424/files/Vexasoft_Cmdlet_Library_x64.msi'
   $vexasoft_file = 'Vexasoft_Cmdlet_Library_x64.msi'
 

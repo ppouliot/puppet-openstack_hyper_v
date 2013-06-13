@@ -1,4 +1,4 @@
-# Class: windows::pywin32
+# Class: openstack-hyper-v::pywin32
 #
 # This module downloads then installs Pywin32-217-py27
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class windows::python::pywin32 {
+class openstack-hyper-v::python::pywin32 {
   $pywin32_url  = 'http://sourceforge.net/projects/pywin32/files/pywin32/Build%20217/pywin32-217.win32-py2.7.exe/download'
   $pywin32_file = 'pywin32-217.win32-py2.7.exe'
 
@@ -39,7 +39,7 @@ class windows::python::pywin32 {
 #   path    => 'C:/Python27/lib/site-packages/',
 #   source  => 'puppet:///modules/windows/pywin32-217.win32-py2.7',
 #   recurse => true,
-#   require => Class['windows::python'],
+#   require => Class['openstack-hyper-v::python'],
 #   before  => Exec['pywin32_post_install'],
 # }
 

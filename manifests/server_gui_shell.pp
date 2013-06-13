@@ -1,4 +1,4 @@
-# Class: windows::server_gui_shell
+# Class: openstack-hyper-v::server_gui_shell
 #
 # This module removes the graphical shell from a full installation of windows
 #
@@ -7,6 +7,6 @@
 # Actions:
 #
 
-class windows::server_gui_shell{
+class openstack-hyper-v::server_gui_shell{
   notify => {'This is working!':}
 }

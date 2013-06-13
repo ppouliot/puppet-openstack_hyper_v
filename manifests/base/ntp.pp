@@ -1,4 +1,4 @@
-# Class: windows::base::ntp
+# Class: openstack-hyper-v::base::ntp
 #
 # This class configures NTP and the Timezone for a windows host
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class windows::base::ntp {
+class openstack-hyper-v::base::ntp {
 
     $timeserver = 'bonehed.lcs.mit.edu'
     $timezone   = 'Eastern Standard Time'

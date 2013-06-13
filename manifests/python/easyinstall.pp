@@ -1,4 +1,4 @@
-# Class: windows::easyinstall
+# Class: openstack-hyper-v::easyinstall
 #
 # This module downloads then installs distribute_setup.py to intsall python setuptools
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class windows::python::easyinstall{
+class openstack-hyper-v::python::easyinstall{
   $ez_url = 'http://python-distribute.org/distribute_setup.py'
   $ez_file = 'distribute_setup.py'
 
@@ -19,6 +19,6 @@ class windows::python::easyinstall{
   exec { 'easy_install_distribute_setup':
     command   => "C:/Python27/python.exe ${::temp}/distribute_setup.py",
     cwd       => $::temp,
-    require   => Class['windows::python', 'windows::python::pywin32','windows::python::mysql_python'],
+    require   => Class['openstack-hyper-v::python', 'openstack-hyper-v::python::pywin32','openstack-hyper-v::python::mysql_python'],
   }
 }

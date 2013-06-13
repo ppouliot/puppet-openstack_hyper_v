@@ -1,4 +1,4 @@
-# Class: windows::commands
+# Class: openstack-hyper-v::commands
 #
 # This module defines reused commands for windows
 #
@@ -8,7 +8,7 @@
 #
 
 
-class windows::commands{
+class openstack-hyper-v::commands{
   define download($url,$file){
     exec{ $name:
       path    => $::path,
@@ -49,7 +49,7 @@ class windows::commands{
   }
 
 
-  # Define: windows::commands::create_ad_domain
+  # Define: openstack-hyper-v::commands::create_ad_domain
   # Create an Active Directory Domain
   #
   define create_ad_domain ( $::domain_name, $::netbios_name, $::domain_user, $::domain_passwd,){
@@ -60,7 +60,7 @@ class windows::commands{
   }
 
   #
-  # Define: windows::commands::join_ad_domain
+  # Define: openstack-hyper-v::commands::join_ad_domain
   # Join an Active Directory Domain
   #
   define join_ad_domain ( $::domain_user, $::domain_passwd,){

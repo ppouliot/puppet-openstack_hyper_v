@@ -1,5 +1,5 @@
 {
-  "name": "ppouliot-windows",
+  "name": "ppouliot-openstack-hyper-v",
   "author": "Peter J. Pouliot",
   "description": "Starting Point for building openstack windows compute nodes\n",
   "license": "Apache",

@@ -1,4 +1,4 @@
-# Class: windows::base::disable_firewalls
+# Class: openstack-hyper-v::base::disable_firewalls
 #
 # This module disables the OS firewalls on the windows host
 #
@@ -6,7 +6,7 @@
 #
 # Actions:
 #
-class windows::base::disable_firewalls {
+class openstack-hyper-v::base::disable_firewalls {
   notify { 'Disabling All Windows Firewalls': }
   exec { 'disable_all_firewalls':
     path    => $::winpath,

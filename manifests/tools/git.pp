@@ -1,4 +1,4 @@
-# Class: windows::git
+# Class: openstack-hyper-v::git
 #
 # This module downloads then installs Git for windows
 #
@@ -8,7 +8,7 @@
 #
 
 
-class windows::tools::git{
+class openstack-hyper-v::tools::git{
   $git_url  = 'http://cloud.github.com/downloads/msysgit/git/Git-1.8.0-preview20121022.exe'
   $git_file = 'Git-1.8.0-preview20121022.exe'
 

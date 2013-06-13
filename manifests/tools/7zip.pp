@@ -1,4 +1,4 @@
-# Class: windows::7zip
+# Class: openstack-hyper-v::7zip
 #
 # This module downloads then installs 7zip
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class windows::tools::7zip(
+class openstack-hyper-v::tools::7zip(
 
   $file    = '7z930-x64.msi',
   #$url    = 'http://downloads.sourceforge.net/sevenzip/7z930-x64.msi',

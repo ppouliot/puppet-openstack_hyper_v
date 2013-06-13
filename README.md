@@ -1,7 +1,7 @@
-Windows (A module for building Windows/Hyper-V OpenStack Compute nodes)
+OpenStack-Hyper-V (A module for building Windows/Hyper-V OpenStack Compute nodes)
 =================================================================
 
-This modules begins the configuration of a windows compute node for openstack.
+This modules begins the configuration of a openstack-hyper-v compute node for openstack.
 
 It currently has the beginings of both from package and from source options.
 
@@ -10,22 +10,22 @@ This is still a work in progress.
 Basic usage
 -----------
 
-To configure windows/hyper-v compute server
+To configure openstack-hyper-v compute on a windows/hyper-v server
 
-    class {'windows': }
+    class {'openstack-hyper-v': }
 
 
 Windows Features
 ----------------
 
-To enable a windows feature
+To enable a openstack-hyper-v feature
 
-windows::enable_feature{"some_windows_feature"}
+openstack-hyper-v::enable_feature{"some_windows_feature"}
 
-To remove a windows feature
+To remove a openstack-hyper-v feature
 
 
-windows::remove_feature{"some_windows_feature"}
+openstack-hyper-v::remove_feature{"some_openstack-hyper-v_feature"}
  
 
 Contributors

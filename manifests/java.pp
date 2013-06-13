@@ -1,4 +1,4 @@
-# Class: windows::java
+# Class: openstack-hyper-v::java
 #
 # This module downloads then installs  the Java JRE
 #
@@ -6,7 +6,7 @@
 #
 # Actions:
 #
-class windows::java{
+class openstack-hyper-v::java{
 
   $java_url = $::architecture ? {
     /(x64)/ => 'http://javadl.sun.com/webapps/download/AutoDL?BundleId=75261',
