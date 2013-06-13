@@ -1,7 +1,7 @@
-# Class: windows
+# Class: openstack-hyper-v
 #
 # This module contains basic configuration tasks for
-# building windows compute nodes for openstack
+# building openstack-hyper-v compute nodes for openstack
 #
 # Parameters: none
 #
@@ -9,7 +9,7 @@
 #
 
 
-class windows {
+class openstack-hyper-v {
   $winpath         = "${::systemroot}\\sysnative;c:\\winpe\\bin;${::path}"
   $powershell_path = "${::systemroot}\\sysnative\\WindowsPowerShell\\v1.0"
   $path            = "${winpath};${powershell_path};${::path}"

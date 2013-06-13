@@ -8,7 +8,7 @@
 #
 class openstack-hyper-v::python::site_packages {
 
- $platlib = "${::temp}\\PLATLIB"
+  $platlib = "${::temp}\\PLATLIB"
 
 # Classes extracting installers to %TEMP%\PLATLIB
   require openstack-hyper-v::python::mysql_python
