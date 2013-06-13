@@ -20,7 +20,6 @@ class windows::tools::git{
   package { 'Git version 1.8.0-preview201221022':
     ensure          => installed,
     source          => "${::temp}\\${git_file}",
-    provider        => 'windows',
     install_options => ['/VERYSILENT','/SUPPRESSMSGBOXES','/LOG'],
     require         => Commands::Download['Git']
   }

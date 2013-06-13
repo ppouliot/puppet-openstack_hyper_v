@@ -19,7 +19,6 @@ class windows::tools::visualcplusplus2010 {
   package { 'vc_web.exe':
     ensure          => installed,
     source          => "${::temp}\\${vs2010_file}",
-    provider        => 'windows',
     install_options => ['/q','/NORESTART'],
     require         => Commands::Download['Visual_Studio_2010_C_Plus_Plus'],
   }

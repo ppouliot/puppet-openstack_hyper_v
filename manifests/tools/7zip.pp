@@ -23,7 +23,6 @@ class windows::tools::7zip(
   package { '7-Zip 9.30 (x64 edition)':
     ensure   => installed,
     source   => "${::temp}\\${file}",
-    provider => windows,
     require  => Commands::Download['7zip']
   }
 

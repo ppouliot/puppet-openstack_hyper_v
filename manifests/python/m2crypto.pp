@@ -19,7 +19,6 @@ class windows::python::m2crypto{
   package { 'Python 2.7 M2Crypto-0.21.1':
     ensure          => installed,
     source          => "${::temp}\\${m2crypto_file}",
-    provider        => windows,
     install_options => '/PASSIVE',
     require         => [Commands::Download['m2crypto.msi'], Package['Python 2.7.3']],
   }

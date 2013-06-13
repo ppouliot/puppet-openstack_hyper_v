@@ -27,8 +27,6 @@ class windows::python::pywin32 {
 #  package { 'Python 2.7 pywin32-217':
 #    ensure          => installed,
 #    source          => "${::temp}\\${pywin32_file}",
-#    provider        => windows,
-#    install_options => '/PASSIVE',
 #    require         => Commands::Download['pywin32'],
 #  }
 
