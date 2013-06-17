@@ -34,21 +34,6 @@
     }
   }
 
-  define hyperv_vswitch($::interface_ip,){
-    exec {"hyper-v_create_vswitch_${name}":
-      path    => $::path,
-      command => "powershell.exe -executionpolicy remotesigned -Command New-VmSwitch -NetAdapterName (Get-NetIPAddress -IPAddress ${::interface_ip}).InterfaceAlias -Name ${name} -AllowManagementOS \$true",
-      unless  => "powershell.exe -executionpolicy remotesigned -Command Get-VMSwitch -Name ${name}",
-    }
-  }
-  define hyperv_remove_vswitch{
-    exec {"hyper-v_remove_vswitch_${name}":
-      path    => $::path,
-      command => "powershell.exe -executionpolicy remotesigned -Command Remove-VMSwitch -Name ${name} -Force",
-    }
-  }
-
-
   # Define: openstack-hyper-v::commands::create_ad_domain
   # Create an Active Directory Domain
   #
