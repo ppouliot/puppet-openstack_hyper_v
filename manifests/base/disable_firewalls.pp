@@ -9,7 +9,7 @@
 class openstack-hyper-v::base::disable_firewalls {
   notify { 'Disabling All Windows Firewalls': }
   exec { 'disable_all_firewalls':
-    path    => $::winpath,
-    command => 'powershell.exe -executionpolicy remotesigned -Command Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False',
+    command  => 'Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False',
+    provider => powershell,
   }
 }

@@ -22,9 +22,10 @@ class openstack-hyper-v::tools::freerdp{
   }
 
   exec { 'install-freerdp-powershell-cmdlet':
-    command => 'powershell.exe -executionpolicy remotesigned -Command Import-Module -Global .\\PSFreeRDP.ps1',
-    require => Commands::Extract_archive['FreeRDP-Powershell-Module'],
-    cwd     => "${::temp}\\FreeRDP",
+    command  => 'Import-Module -Global .\\PSFreeRDP.ps1',
+    require  => Commands::Extract_archive['FreeRDP-Powershell-Module'],
+    provider => powershell,
+    cwd      => "${::temp}\\FreeRDP",
   }
 
 }
