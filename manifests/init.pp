@@ -9,7 +9,12 @@
 #
 
 
-class openstack-hyper-v {
+class openstack-hyper-v (
+  # Virtual switch
+  $virtual_switch_name = 'br100',
+  $virtual_switch_address = $::ipaddress,
+  $virtual_switch_os_managed = true,
+){
   $winpath         = "${::systemroot}\\sysnative;c:\\winpe\\bin;${::path}"
   $powershell_path = "${::systemroot}\\sysnative\\WindowsPowerShell\\v1.0"
   $path            = "${winpath};${powershell_path};${::path}"
@@ -19,6 +24,15 @@ class openstack-hyper-v {
   Exec{
     path => "${powershell_path};${winpath};${::path}",
   }
+
+  class { 'openstack-hyper-v::base::virtual_switch':
+    name              => $virtual_switch_name,
+    notes             => 'OpenStack Compute Virtual Switch',
+    interface_address => $virtual_switch_address,
+    connection_type   => 'External',
+    os_managed        => $virtual_switch_os_managed,
+  }  
+
 #  class { 'openstack-hyper-v::commands': }
   include quartermaster::commands
   class { 'openstack-hyper-v::base::ntp': }
