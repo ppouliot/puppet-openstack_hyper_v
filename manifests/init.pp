@@ -9,7 +9,12 @@
 #
 
 
-class openstack-hyper-v {
+class openstack-hyper-v (
+  # live migration parameters
+  $live_migration          = false,
+  $live_migration_type     = 'Kerberos',
+  $live_migration_networks = undef,
+) {
   $winpath         = "${::systemroot}\\sysnative;c:\\winpe\\bin;${::path}"
   $powershell_path = "${::systemroot}\\sysnative\\WindowsPowerShell\\v1.0"
   $path            = "${winpath};${powershell_path};${::path}"
@@ -19,6 +24,13 @@ class openstack-hyper-v {
   Exec{
     path => "${powershell_path};${winpath};${::path}",
   }
+
+  class { 'openstack-hyper-v::base::live_migration':
+    enable                          => $live_migration,
+    authentication_type             => $live_migration_type,
+    allowed_networks                => $live_migration_networks,
+  }
+
 #  class { 'openstack-hyper-v::commands': }
   include quartermaster::commands
   class { 'openstack-hyper-v::base::ntp': }
