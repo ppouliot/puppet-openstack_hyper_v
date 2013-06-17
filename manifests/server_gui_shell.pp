@@ -8,5 +8,5 @@
 #
 
 class openstack-hyper-v::server_gui_shell{
-  notify => {'This is working!':}
+  notify {'This is working!':}
 }
