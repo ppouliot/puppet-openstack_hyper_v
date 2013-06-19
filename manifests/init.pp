@@ -25,11 +25,10 @@ class openstack-hyper-v (
     path => "${powershell_path};${winpath};${::path}",
   }
 
-  class { 'openstack-hyper-v::base::virtual_switch':
-    name              => $virtual_switch_name,
+  virtual_switch { $virtual_switch_name:
     notes             => 'OpenStack Compute Virtual Switch',
     interface_address => $virtual_switch_address,
-    connection_type   => 'External',
+    type              => External,
     os_managed        => $virtual_switch_os_managed,
   }  
 
