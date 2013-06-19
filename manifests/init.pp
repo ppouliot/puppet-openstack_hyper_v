@@ -10,11 +10,19 @@
 
 
 class openstack-hyper-v (
+<<<<<<< HEAD
   # live migration parameters
   $live_migration          = false,
   $live_migration_type     = 'Kerberos',
   $live_migration_networks = undef,
 ) {
+=======
+  # Virtual switch
+  $virtual_switch_name = 'br100',
+  $virtual_switch_address = $::ipaddress,
+  $virtual_switch_os_managed = true,
+){
+>>>>>>> 84aeb55d2a2111830ff4417069ca1c832ad4cb31
   $winpath         = "${::systemroot}\\sysnative;c:\\winpe\\bin;${::path}"
   $powershell_path = "${::systemroot}\\sysnative\\WindowsPowerShell\\v1.0"
   $path            = "${winpath};${powershell_path};${::path}"
@@ -25,11 +33,20 @@ class openstack-hyper-v (
     path => "${powershell_path};${winpath};${::path}",
   }
 
+<<<<<<< HEAD
   class { 'openstack-hyper-v::base::live_migration':
     enable                          => $live_migration,
     authentication_type             => $live_migration_type,
     allowed_networks                => $live_migration_networks,
   }
+=======
+  virtual_switch { $virtual_switch_name:
+    notes             => 'OpenStack Compute Virtual Switch',
+    interface_address => $virtual_switch_address,
+    type              => External,
+    os_managed        => $virtual_switch_os_managed,
+  }  
+>>>>>>> 84aeb55d2a2111830ff4417069ca1c832ad4cb31
 
 #  class { 'openstack-hyper-v::commands': }
   include quartermaster::commands
