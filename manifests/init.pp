@@ -1,55 +1,63 @@
-# Class: openstack-hyper-v
+# === Class: openstack-hyper-v
 #
-# This module contains basic configuration tasks for
-# building openstack-hyper-v compute nodes for openstack
+# This module contains basic configuration tasks for building openstack-hyper-v
+# compute nodes for openstack
 #
-# Parameters: none
+# === Parameters
 #
-# Actions:
+# [*live_migration*]
+#   Specify if the compute node will have the live migration enabled
+# [*live_migration_type*]
+#   Authentication method used for migration: 'Kerberos' or 'CredSSP'
+# [*live_migration_networks*]
+#   Comma separated list of the networks allowed in live migration. If the
+#   value is undef, any network will be allowed.
+# [*virtual_switch_name*]
+#   Name of the virtual switch to define in the hypervisor.
+# [*virtual_switch_address*]
+#   IP address of the physical adapter where the switch will be bound
+# [*virtual_switch_os_managed*]
+#   Specifies if the management OS is to have access to the physical adapter
 #
-
-
+# == Examples
+#
+#  class { 'openstack-hyper-v':
+#    live_migration            => true,
+#    live_migration_type       => 'Kerberos',
+#    live_migration_networks   => '192.168.0.0/24',
+#    virtual_switch_name       => 'br100',
+#    virtual_switch_address    => '192.168.1.133',
+#    virtual_switch_os_managed => true,
+#  }
+#
+# == Authors
+#
 class openstack-hyper-v (
-<<<<<<< HEAD
-  # live migration parameters
-  $live_migration          = false,
-  $live_migration_type     = 'Kerberos',
-  $live_migration_networks = undef,
-) {
-=======
-  # Virtual switch
-  $virtual_switch_name = 'br100',
-  $virtual_switch_address = $::ipaddress,
+  # Live Migration
+  $live_migration            = false,
+  $live_migration_type       = 'Kerberos',
+  $live_migration_networks   = undef,
+  # Virtual Switch
+  $virtual_switch_name       = 'br100',
+  $virtual_switch_address    = $::ipaddress,
   $virtual_switch_os_managed = true,
 ){
->>>>>>> 84aeb55d2a2111830ff4417069ca1c832ad4cb31
-  $winpath         = "${::systemroot}\\sysnative;c:\\winpe\\bin;${::path}"
-  $powershell_path = "${::systemroot}\\sysnative\\WindowsPowerShell\\v1.0"
-  $path            = "${winpath};${powershell_path};${::path}"
-  #Default Time Source and Zone
-  #$timeserver = 'bonehed.lcs.mit.edu'
-  #$timezone   = 'Eastern Standard Time'
-  Exec{
-    path => "${powershell_path};${winpath};${::path}",
+
+  class { 'openstack-hyper-v::commands': }
+
+  class { 'openstack-hyper-v::base::live_migration':
+    enable              => $live_migration,
+    authentication_type => $live_migration_type,
+    allowed_networks    => $live_migration_networks,
   }
 
-<<<<<<< HEAD
-  class { 'openstack-hyper-v::base::live_migration':
-    enable                          => $live_migration,
-    authentication_type             => $live_migration_type,
-    allowed_networks                => $live_migration_networks,
-  }
-=======
   virtual_switch { $virtual_switch_name:
     notes             => 'OpenStack Compute Virtual Switch',
     interface_address => $virtual_switch_address,
     type              => External,
     os_managed        => $virtual_switch_os_managed,
   }  
->>>>>>> 84aeb55d2a2111830ff4417069ca1c832ad4cb31
 
-#  class { 'openstack-hyper-v::commands': }
-  include quartermaster::commands
   class { 'openstack-hyper-v::base::ntp': }
   class { 'openstack-hyper-v::base::disable_firewalls': }
   class { 'openstack-hyper-v::base::enable_auto_update': }
