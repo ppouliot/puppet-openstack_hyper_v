@@ -13,13 +13,21 @@ Basic usage
 To configure openstack-hyper-v compute on a windows/hyper-v server
 
 class { 'openstack-hyper-v':
+
     live_migration            => true,
+
     live_migration_type       => 'Kerberos',
+
     live_migration_networks   => '192.168.0.0/24',
+
     virtual_switch_name       => 'br100',
+
     virtual_switch_address    => '192.168.1.133',
+
     virtual_switch_os_managed => true,
+
   }
+
 
 
 
