@@ -7,30 +7,29 @@
 # Actions:
 #
 
-
-#class openstack-hyper-v::commands{
+class openstack-hyper-v::commands{
   define download($url,$file){
     exec{ $name:
-      path    => $::path,
-# Depreciated: PP -> REmoving to test new Powershell metnod for downloading content.
-#     command => "powershell.exe -executionpolicy remotesigned -Command Invoke-WebRequest -UseBasicParsing -uri ${url} -OutFile ${file}",
-      command => "powershell.exe -executionpolicy remotesigned -Command (new-object Net.WebClient).DownloadFile(\'${url}\',\'${::temp}\\${file}\')",
+      # Depreciated: PP -> REmoving to test new Powershell metnod for downloading content.
+      # command => "Invoke-WebRequest -UseBasicParsing -uri ${url} -OutFile ${file}",
+      command => "(new-object Net.WebClient).DownloadFile(\'${url}\',\'${::temp}\\${file}\')",
       creates => "${::temp}\\${file}",
-      cwd     => $::temp,
-      unless  => "cmd.exe /c if not exist ${::temp}\\${file}",
+      unless  => "exit !(Get-Item ${::temp}\\${file})",
     }
   }
 
   define add_windows_feature(){
     exec { "ps_add_feature_${name}":
-      path    => $::path,
-      command => "powershell.exe -executionpolicy remotesigned -Command Add-WindowsFeature -Name ${name}",
+      command  => "Add-WindowsFeature -Name ${name}",
+      unless   => "if(!(Get-WindowsFeature ${name}).Installed){ exit 1 }",
+      provider => powershell,
     }
   }
   define remove_windows_feature{
     exec { "ps_remove_feature-${name}":
-      path    => $::path,
-      command => "powershell.exe -executionpolicy remotesigned -Command Remove-WindowsFeature -name ${name}",
+      command  => "Remove-WindowsFeature -name ${name}",
+      unless   => "if((Get-WindowsFeature ${name}).Installed){ exit 1 }",
+      provider => powershell,
     }
   }
 
@@ -39,8 +38,9 @@
   #
   define create_ad_domain ( $::domain_name, $::netbios_name, $::domain_user, $::domain_passwd,){
     exec {'create_active_directory_domain':
-      command => "powershell.exe -executionpolicy remotesigned -Command Install-ADDSForest -CreateDNSDelegation:\$false -DatabasePath \"${::windir}\\NTDS\" --DomainMode \"Win2012\" -DomainName \"${::domain_name}\" -DomainNetbiosName \"${::netbiso_name}\" -ForestMode \"Win2012\" -InstallDNS:\$true -LogPath \"${::windir}\\NTDS\" -NoRebootOnCompletion:\$false -SysVolPath \"${::windir}\\SYSVOL\" -Force:\$true",
-      unless  => 'powershell.exe -executionpolicy remotesigned -Command Import-Module ADDSDeployment',
+      command  => "Install-ADDSForest -CreateDNSDelegation:\$false -DatabasePath \"${::windir}\\NTDS\" --DomainMode \"Win2012\" -DomainName \"${::domain_name}\" -DomainNetbiosName \"${::netbiso_name}\" -ForestMode \"Win2012\" -InstallDNS:\$true -LogPath \"${::windir}\\NTDS\" -NoRebootOnCompletion:\$false -SysVolPath \"${::windir}\\SYSVOL\" -Force:\$true",
+      unless   => 'Import-Module ADDSDeployment',
+      provider => powershell,
     }
   }
 
@@ -50,10 +50,10 @@
   #
   define join_ad_domain ( $::domain_user, $::domain_passwd,){
     exec { 'join_domain':
-      path    => $::path,
-      command => "powershell.exe -executionpolicy remotesigned -Command Add-Computer -DomainName ${name} -credential (New-Object System.Management.Automation.PSCredential ${name}\\${::domain_user},(ConvertTo-SecureString \"${::domain_passwd}\" -AsPlainText -Force)) -Restart",
-#     unless  => 'powershell.exe -executionpolicy remotesigned -Command (Get-ComputerInfo).IsDomainJoined',
-#     notify  => Exec['reboot-windows'],
+      command  => "Add-Computer -DomainName ${name} -credential (New-Object System.Management.Automation.PSCredential ${name}\\${::domain_user},(ConvertTo-SecureString \"${::domain_passwd}\" -AsPlainText -Force)) -Restart",
+      provider => powershell,
+      # unless  => '(Get-ComputerInfo).IsDomainJoined',
+      # notify  => Exec['reboot-windows'],
     }
   }
 
@@ -90,5 +90,4 @@
       require => Package['7-Zip 9.30 (x64 edition)'],
     }
   }
-
-#}
+}
