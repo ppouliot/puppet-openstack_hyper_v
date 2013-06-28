@@ -38,7 +38,7 @@ Puppet::Type.newtype(:virtual_switch) do
     desc "IP address from one physical net adapter to bind the switch"
   end
 
-  newproperty(:os_managed, :boolean = >true, :parent => Puppet::Parameter::Boolean) do
+  newproperty(:os_managed, :boolean => true, :parent => Puppet::Parameter::Boolean) do
     desc "A property that allows the management OS to share the device"
   end
 
