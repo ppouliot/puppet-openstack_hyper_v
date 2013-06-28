@@ -12,9 +12,10 @@ class openstack-hyper-v::commands{
     exec{ $name:
       # Depreciated: PP -> REmoving to test new Powershell metnod for downloading content.
       # command => "Invoke-WebRequest -UseBasicParsing -uri ${url} -OutFile ${file}",
-      command => "(new-object Net.WebClient).DownloadFile(\'${url}\',\'${::temp}\\${file}\')",
-      creates => "${::temp}\\${file}",
-      unless  => "exit !(Get-Item ${::temp}\\${file})",
+      command  => "(new-object Net.WebClient).DownloadFile(\'${url}\',\'${::temp}\\${file}\')",
+      creates  => "${::temp}\\${file}",
+      unless   => "exit !(Get-Item ${::temp}\\${file})",
+      provider => powershell,
     }
   }
 
