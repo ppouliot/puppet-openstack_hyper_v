@@ -62,8 +62,12 @@ Puppet::Type.type(:virtual_switch).provide(:virtual_switch) do
   def interface_address
     if resource[:type] == :External
       interface_address = powershell(%/(Get-NetIPAddress |where {(Get-NetAdapter |where {$_.MacAddress -eq (Get-NetAdapter -InterfaceDescription (Get-VMSwitch "#{resource[:name]}").NetAdapterInterfaceDescription).MacAddress}).ifIndex -contains $_.InterfaceIndex}).IPAddress/)
-      interface_address =~ /^(.*)/
-      $1
+      if interface_address.include? resource[:interface_address]
+        resource[:interface_address]
+      else
+        interface_address =~ /^(.*)/
+        $1
+      end
     else
       nil
     end
@@ -77,7 +81,12 @@ Puppet::Type.type(:virtual_switch).provide(:virtual_switch) do
   def os_managed
     os_managed = powershell(%/(Get-VMSwitch "#{resource[:name]}").AllowManagementOS/)
     os_managed =~ /^(.*)/
-    $1
+    case $1
+    when 'True'
+      true
+    when 'False'
+      false
+    end
   end
   def os_managed=(value)
     if resource[:type] == :External
