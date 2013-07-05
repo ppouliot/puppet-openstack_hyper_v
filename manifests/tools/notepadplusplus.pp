@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::tools::notepadplusplus
+# Class: openstack_hyper_v::tools::notepadplusplus
 #
 # This module downloads then installs Notepad++
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class openstack-hyper-v::tools::notepadplusplus {
+class openstack_hyper_v::tools::notepadplusplus {
 
   $notepadpp_url  = 'http://download.tuxfamily.org/notepadplus/6.3/npp.6.3.Installer.exe'
   $notepadpp_file = 'npp63Installer.exe'

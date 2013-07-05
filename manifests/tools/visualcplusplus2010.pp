@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::tools::visualcplusplus2010
+# Class: openstack_hyper_v::tools::visualcplusplus2010
 #
 # This module downloads then installs Visual C++
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class openstack-hyper-v::tools::visualcplusplus2010 {
+class openstack_hyper_v::tools::visualcplusplus2010 {
   $vs2010_url  = 'http://go.microsoft.com/?linkid=9709949'
   $vs2010_file = 'vc_web.exe'
 
