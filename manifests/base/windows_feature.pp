@@ -12,9 +12,9 @@
 #
 # === Examples
 #
-#   example_class::example_resource { 'namevar':
-#     basedir => '/tmp/src',
-#   }
+#  openstack_hyper_v::base::windows_feature { 'Hyper-V':
+#    ensure => present,
+#  }
 #
 # === Authors
 #
