@@ -43,12 +43,13 @@ class openstack_hyper_v (
   $virtual_switch_os_managed = true,
 ){
 
-  class { 'openstack_hyper_v::commands': }
+  class { 'openstack_hyper_v::base::hyper_v': }
 
   class { 'openstack_hyper_v::base::live_migration':
     enable              => $live_migration,
     authentication_type => $live_migration_type,
     allowed_networks    => $live_migration_networks,
+    require             => Class['openstack_hyper_v::base::hyper_v'],
   }
 
   virtual_switch { $virtual_switch_name:
@@ -56,6 +57,7 @@ class openstack_hyper_v (
     interface_address => $virtual_switch_address,
     type              => External,
     os_managed        => $virtual_switch_os_managed,
+    require           => Class['openstack_hyper_v::base::hyper_v'],
   }  
 
   class { 'openstack_hyper_v::base::ntp': }

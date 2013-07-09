@@ -19,21 +19,6 @@ class openstack_hyper_v::commands{
     }
   }
 
-  define add_windows_feature(){
-    exec { "ps_add_feature_${name}":
-      command  => "Add-WindowsFeature -Name ${name}",
-      unless   => "if(!(Get-WindowsFeature ${name}).Installed){ exit 1 }",
-      provider => powershell,
-    }
-  }
-  define remove_windows_feature{
-    exec { "ps_remove_feature-${name}":
-      command  => "Remove-WindowsFeature -name ${name}",
-      unless   => "if((Get-WindowsFeature ${name}).Installed){ exit 1 }",
-      provider => powershell,
-    }
-  }
-
   # Define: openstack_hyper_v::commands::create_ad_domain
   # Create an Active Directory Domain
   #
