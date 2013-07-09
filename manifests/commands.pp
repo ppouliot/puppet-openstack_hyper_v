@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::commands
+# Class: openstack_hyper_v::commands
 #
 # This module defines reused commands for windows
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class openstack-hyper-v::commands{
+class openstack_hyper_v::commands{
   define download($url,$file){
     exec{ $name:
       # Depreciated: PP -> REmoving to test new Powershell metnod for downloading content.
@@ -34,7 +34,7 @@ class openstack-hyper-v::commands{
     }
   }
 
-  # Define: openstack-hyper-v::commands::create_ad_domain
+  # Define: openstack_hyper_v::commands::create_ad_domain
   # Create an Active Directory Domain
   #
   define create_ad_domain ( $::domain_name, $::netbios_name, $::domain_user, $::domain_passwd,){
@@ -46,7 +46,7 @@ class openstack-hyper-v::commands{
   }
 
   #
-  # Define: openstack-hyper-v::commands::join_ad_domain
+  # Define: openstack_hyper_v::commands::join_ad_domain
   # Join an Active Directory Domain
   #
   define join_ad_domain ( $::domain_user, $::domain_passwd,){

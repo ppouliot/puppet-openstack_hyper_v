@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::freerdp
+# Class: openstack_hyper_v::freerdp
 #
 # This module downloads then installs Cloudbase Solutions FreeRDP tools
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class openstack-hyper-v::tools::freerdp{
+class openstack_hyper_v::tools::freerdp{
 
   $rdp_url  = 'http://www.cloudbase.it/downloads/FreeRDP_win32_x86_20121010.zip'
   $rdp_file = 'FreeRDP_win32_x86_20121010.zip'

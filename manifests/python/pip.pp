@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::pip
+# Class: openstack_hyper_v::pip
 #
 # This module uses easy_install.exe to install python pip
 #
@@ -6,11 +6,11 @@
 #
 # Actions:
 #
-class openstack-hyper-v::python::pip {
+class openstack_hyper_v::python::pip {
 
     exec { 'easy_install_pip':
         command   => 'C:\\Python27\\Scripts\\easy_install.exe pip',
-        require   => Class ['openstack-hyper-v::python', 'openstack-hyper-v::python::easyinstall'],
+        require   => Class ['openstack_hyper_v::python', 'openstack_hyper_v::python::easyinstall'],
     }
 
 }

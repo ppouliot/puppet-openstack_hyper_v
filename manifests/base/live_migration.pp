@@ -1,4 +1,4 @@
-# == Class: openstack-hyper-v::base::live_migration
+# == Class: openstack_hyper_v::base::live_migration
 #
 # This class is responsible of configuring the live migration on the Hyper-V hypervisors
 #
@@ -18,13 +18,13 @@
 #
 # == Examples
 #
-#  class { 'openstack-hyper-v::base::live_migration':
+#  class { 'openstack_hyper_v::base::live_migration':
 #    enabled                      => true,
 #    authentication_type          => 'Kerberos',
 #    simultaneous_live_migrations => 3,
 #  }
 #
-#  class { 'openstack-hyper-v::base::live_migration':
+#  class { 'openstack_hyper_v::base::live_migration':
 #    enabled          => true,
 #    allowed_networks => '192.168.0.0/24,10.0.0.0/16'
 #  }
@@ -35,7 +35,7 @@
 # Octavian Ciuhandu ociuhandu@cloudbasesolutions.com
 # Luis Fernandez Alvarez luis.fernandez.alvarez@cern.ch
 #
-class openstack-hyper-v::base::live_migration(
+class openstack_hyper_v::base::live_migration(
   $enable = true,
   $authentication_type = 'Kerberos',
   $allowed_networks = undef,

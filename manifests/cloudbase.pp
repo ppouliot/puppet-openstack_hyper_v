@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::cloudbase
+# Class: openstack_hyper_v::cloudbase
 #
 # This module downloads then installs the Cloudbase Solution Hyper-V OpenStack Installer
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class openstack-hyper-v::cloudbase {
+class openstack_hyper_v::cloudbase {
   $admin_pwd            = 'openstack'
   $devstack             = '10.21.7.51'
   $cb_url               = 'http://www.cloudbase.it/downloads'

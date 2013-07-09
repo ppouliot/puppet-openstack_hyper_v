@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::base::rdp
+# Class: openstack_hyper_v::base::rdp
 #
 # This module enables RDP access to the windows host and allows the more flexible method of connectivity
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class openstack-hyper-v::base::rdp {
+class openstack_hyper_v::base::rdp {
 
   exec { 'enable_rdp_connection':
     command  => '(Get-WmiObject win32_TerminalServiceSetting -Namespace root\\cimv2\\TerminalServices).SetAllowTSConnections(1)',
