@@ -18,6 +18,9 @@
 #   IP address of the physical adapter where the switch will be bound
 # [*virtual_switch_os_managed*]
 #   Specifies if the management OS is to have access to the physical adapter
+# [*purge_nova_config*]
+#   Specifies if the nova_config file will only have values configured with
+#   puppet.
 #
 # == Examples
 #
@@ -41,6 +44,8 @@ class openstack_hyper_v (
   $virtual_switch_name       = 'br100',
   $virtual_switch_address    = $::ipaddress,
   $virtual_switch_os_managed = true,
+  # Others
+  $purge_nova_config         = true,
 ){
 
   class { 'openstack_hyper_v::base::hyper_v': }
@@ -59,6 +64,18 @@ class openstack_hyper_v (
     os_managed        => $virtual_switch_os_managed,
     require           => Class['openstack_hyper_v::base::hyper_v'],
   }  
+
+  if ! defined( Resources[nova_config] ) {
+    if $purge_nova_config {
+      resources { 'nova_config':
+        purge => true,
+      }
+    }
+  }
+
+  nova_config {
+    'DEFAULT/compute_driver': value => 'nova.virt.hyperv.driver.HyperVDriver';
+  }
 
   class { 'openstack_hyper_v::base::ntp': }
   class { 'openstack_hyper_v::base::disable_firewalls': }
