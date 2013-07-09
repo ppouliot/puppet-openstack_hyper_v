@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::openstack::folders
+# Class: openstack_hyper_v::openstack::folders
 #
 # This creates the default folder layout for the running configuration of openstack
 #
@@ -6,7 +6,7 @@
 #
 # Actions:
 #
-class openstack-hyper-v::openstack::folders {
+class openstack_hyper_v::openstack::folders {
 
   file { 'c:\openstack':
     ensure => directory,

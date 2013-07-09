@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::base::enable_auto_update
+# Class: openstack_hyper_v::base::enable_auto_update
 #
 # This sets the windows to host to update automatically
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class openstack-hyper-v::base::enable_auto_update {
+class openstack_hyper_v::base::enable_auto_update {
   notify { 'Enabling Automatic Windows Updates': }
   exec { 'enable_automatic_updates':
     path    => $::path,

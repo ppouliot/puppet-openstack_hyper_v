@@ -1,7 +1,7 @@
 OpenStack-Hyper-V (A module for building Windows/Hyper-V OpenStack Compute nodes)
 =================================================================
 
-This modules begins the configuration of a openstack-hyper-v compute node for openstack.
+This modules begins the configuration of a openstack_hyper_v compute node for openstack.
 
 It currently has the beginings of both from package and from source options.
 
@@ -10,9 +10,9 @@ This is still a work in progress.
 Basic usage
 -----------
 
-To configure openstack-hyper-v compute on a windows/hyper-v server
+To configure openstack_hyper_v compute on a windows/hyper-v server
 
-    class { 'openstack-hyper-v':
+    class { 'openstack_hyper_v':
       live_migration            => true,
       live_migration_type       => 'Kerberos',
       live_migration_networks   => '192.168.0.0/24',
@@ -27,14 +27,14 @@ To configure openstack-hyper-v compute on a windows/hyper-v server
 Windows Features
 ----------------
 
-To enable a openstack-hyper-v feature
+To enable a openstack_hyper_v feature
 
-openstack-hyper-v::enable_feature{"some_windows_feature"}
+openstack_hyper_v::enable_feature{"some_windows_feature"}
 
-To remove a openstack-hyper-v feature
+To remove a openstack_hyper_v feature
 
 
-openstack-hyper-v::remove_feature{"some_openstack-hyper-v_feature"}
+openstack_hyper_v::remove_feature{"some_openstack_hyper_v_feature"}
  
 
 Contributors
@@ -42,7 +42,7 @@ Contributors
 
  * Peter Pouliot <peter@pouliot.net>
  * Octavian Ciuhandu <ociuhandu@cloudbasesolutions.com>
- * Luis Fernandez Alverez <luis.fernandez.alvarez@cern.ch>
+ * Luis Fernandez Alvarez <luis.fernandez.alvarez@cern.ch>
 
 
 Copyright and License

@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::pycrypto
+# Class: openstack_hyper_v::pycrypto
 #
 # This module downloads then installs Python Mysql Binaries
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class openstack-hyper-v::python::pycrypto {
+class openstack_hyper_v::python::pycrypto {
   $pycrypto_url = 'http://www.voidspace.org.uk/downloads/pycrypto26/pycrypto-2.6.win32-py2.7.exe'
   $pycrypto_file = 'pycrypto-2.6.win32-py2.7.exe'
 

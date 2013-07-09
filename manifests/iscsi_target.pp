@@ -1,4 +1,4 @@
-class hyper-v::iscsi-target {
+class hyper_v::iscsi_target {
   notify { "Installing Windows iSCSI TargetFeatures": }
   exec { 'add_iscsi_target_feature':
    path => $::path,

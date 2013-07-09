@@ -1,4 +1,4 @@
-class hyper-v::enable_rdp {
+class hyper_v::enable_rdp {
   notify { "Allowing Terminal Service Connections": }
   exec { 'allow_ts_connection':
    path => $::path,

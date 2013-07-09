@@ -1,6 +1,6 @@
-# === Class: openstack-hyper-v
+# === Class: openstack_hyper_v
 #
-# This module contains basic configuration tasks for building openstack-hyper-v
+# This module contains basic configuration tasks for building openstack_hyper_v
 # compute nodes for openstack
 #
 # === Parameters
@@ -21,7 +21,7 @@
 #
 # == Examples
 #
-#  class { 'openstack-hyper-v':
+#  class { 'openstack_hyper_v':
 #    live_migration            => true,
 #    live_migration_type       => 'Kerberos',
 #    live_migration_networks   => '192.168.0.0/24',
@@ -32,7 +32,7 @@
 #
 # == Authors
 #
-class openstack-hyper-v (
+class openstack_hyper_v (
   # Live Migration
   $live_migration            = false,
   $live_migration_type       = 'Kerberos',
@@ -43,9 +43,9 @@ class openstack-hyper-v (
   $virtual_switch_os_managed = true,
 ){
 
-  class { 'openstack-hyper-v::commands': }
+  class { 'openstack_hyper_v::commands': }
 
-  class { 'openstack-hyper-v::base::live_migration':
+  class { 'openstack_hyper_v::base::live_migration':
     enable              => $live_migration,
     authentication_type => $live_migration_type,
     allowed_networks    => $live_migration_networks,
@@ -58,35 +58,35 @@ class openstack-hyper-v (
     os_managed        => $virtual_switch_os_managed,
   }  
 
-  class { 'openstack-hyper-v::base::ntp': }
-  class { 'openstack-hyper-v::base::disable_firewalls': }
-  class { 'openstack-hyper-v::base::enable_auto_update': }
-  class { 'openstack-hyper-v::base::rdp': }
+  class { 'openstack_hyper_v::base::ntp': }
+  class { 'openstack_hyper_v::base::disable_firewalls': }
+  class { 'openstack_hyper_v::base::enable_auto_update': }
+  class { 'openstack_hyper_v::base::rdp': }
 
   # Tools
-  class { 'openstack-hyper-v::tools::7zip': }
-  class { 'openstack-hyper-v::tools::vexasoftcmdlet': }
-  class { 'openstack-hyper-v::tools::git': }
+  class { 'openstack_hyper_v::tools::7zip': }
+  class { 'openstack_hyper_v::tools::vexasoftcmdlet': }
+  class { 'openstack_hyper_v::tools::git': }
   # Optional
-  class { 'openstack-hyper-v::java': }
-  class { 'openstack-hyper-v::tools::notepadplusplus': }
-  class { 'openstack-hyper-v::tools::google_chrome': }
-  #class {' openstack-hyper-v::tools::visualcplusplus2010': }
-  #class { 'openstack-hyper-v::tools::visualcplusplus2012': }
-  class { 'openstack-hyper-v::tools::freerdp': }
+  class { 'openstack_hyper_v::java': }
+  class { 'openstack_hyper_v::tools::notepadplusplus': }
+  class { 'openstack_hyper_v::tools::google_chrome': }
+  #class {' openstack_hyper_v::tools::visualcplusplus2010': }
+  #class { 'openstack_hyper_v::tools::visualcplusplus2012': }
+  class { 'openstack_hyper_v::tools::freerdp': }
 # Begin Python Stack
-  class { 'openstack-hyper-v::python': }
-  class { 'openstack-hyper-v::python::m2crypto': }
+  class { 'openstack_hyper_v::python': }
+  class { 'openstack_hyper_v::python::m2crypto': }
 # Classes extracting installers to %TEMP%\PLATLIB
 # -- Moving to site_packages.pp
-#  class { 'openstack-hyper-v::python::mysql_python': }
-#  class { 'openstack-hyper-v::python::pycrypto': }
-#  class { 'openstack-hyper-v::python::pywin32': }
-#  class { 'openstack-hyper-v::python::greenlet': }
-#  class { 'openstack-hyper-v::python::lxml': }
-  class { 'openstack-hyper-v::python::site_packages': }
-  class { 'openstack-hyper-v::python::easyinstall': }
-  class { 'openstack-hyper-v::python::pip': }
-  class { 'openstack-hyper-v::openstack::folders':}
+#  class { 'openstack_hyper_v::python::mysql_python': }
+#  class { 'openstack_hyper_v::python::pycrypto': }
+#  class { 'openstack_hyper_v::python::pywin32': }
+#  class { 'openstack_hyper_v::python::greenlet': }
+#  class { 'openstack_hyper_v::python::lxml': }
+  class { 'openstack_hyper_v::python::site_packages': }
+  class { 'openstack_hyper_v::python::easyinstall': }
+  class { 'openstack_hyper_v::python::pip': }
+  class { 'openstack_hyper_v::openstack::folders':}
 
 }

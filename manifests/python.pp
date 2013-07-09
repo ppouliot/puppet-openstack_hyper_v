@@ -1,4 +1,4 @@
-# Class: openstack-hyper-v::python
+# Class: openstack_hyper_v::python
 #
 # This module downloads then installs Python 2.7.3
 #
@@ -7,7 +7,7 @@
 # Actions:
 #
 
-class openstack-hyper-v::python {
+class openstack_hyper_v::python {
 
   $py_url  = 'http://www.python.org/ftp/python/2.7.3'
   $py_file = 'python-2.7.3.msi'
