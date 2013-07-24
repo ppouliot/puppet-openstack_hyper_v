@@ -77,6 +77,7 @@ class openstack_hyper_v (
     'DEFAULT/compute_driver': value => 'nova.virt.hyperv.driver.HyperVDriver';
   }
 
+
   class { 'openstack_hyper_v::base::ntp': }
   class { 'openstack_hyper_v::base::disable_firewalls': }
   class { 'openstack_hyper_v::base::enable_auto_update': }
@@ -86,6 +87,7 @@ class openstack_hyper_v (
   class { 'openstack_hyper_v::tools::7zip': }
   class { 'openstack_hyper_v::tools::vexasoftcmdlet': }
   class { 'openstack_hyper_v::tools::git': }
+
   # Optional
   class { 'openstack_hyper_v::java': }
   class { 'openstack_hyper_v::tools::notepadplusplus': }
@@ -93,19 +95,12 @@ class openstack_hyper_v (
   #class {' openstack_hyper_v::tools::visualcplusplus2010': }
   #class { 'openstack_hyper_v::tools::visualcplusplus2012': }
   class { 'openstack_hyper_v::tools::freerdp': }
-# Begin Python Stack
-  class { 'openstack_hyper_v::python': }
-  class { 'openstack_hyper_v::python::m2crypto': }
-# Classes extracting installers to %TEMP%\PLATLIB
-# -- Moving to site_packages.pp
-#  class { 'openstack_hyper_v::python::mysql_python': }
-#  class { 'openstack_hyper_v::python::pycrypto': }
-#  class { 'openstack_hyper_v::python::pywin32': }
-#  class { 'openstack_hyper_v::python::greenlet': }
-#  class { 'openstack_hyper_v::python::lxml': }
-  class { 'openstack_hyper_v::python::site_packages': }
-  class { 'openstack_hyper_v::python::easyinstall': }
-  class { 'openstack_hyper_v::python::pip': }
+
+  # Python Stack
+  class { 'openstack_hyper_v::python': 
+   require => Class['openstack_hyper_v::tools::7zip'],
+  }
+   
   class { 'openstack_hyper_v::openstack::folders':}
 
 }
