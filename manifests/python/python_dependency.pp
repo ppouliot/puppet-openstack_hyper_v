@@ -31,41 +31,61 @@ define openstack_hyper_v::python::python_dependency (
   $remote_url = undef,
   $local_path = "${::temp}\\${title}.${type}",
 ){
-  if $remote_url {
-    openstack_hyper_v::commands::download{$local_path:
-      url  => $remote_url,
-      file => $local_path,
-    }
-  }
 
   case $type {
     exe: {
-      commands::extract_archive{"exe-installer-extract-${dependency_name}":
-        archivefile => $local_path,
+      if $remote_url {
+        openstack_hyper_v::commands::download{$local_path:
+          url    => $remote_url,
+          file   => $local_path,
+          before => Openstack_hyper_v::Commands::Extract_archive["exe-installer-extract-${dependency_name}"],
+        }
+      }
+
+      openstack_hyper_v::commands::extract_archive{"exe-installer-extract-${dependency_name}":
+        archivefile => $local_path,        
+      }
+
+      exec { "trigger-python-dependency-${dependency_name}":
+        command  => "Write-Output \"Installing python dependency: ${dependency_name}",
+        unless   => "exit !(Test-Path C:\\Python27\\Lib\\site-packages\\${dependency_name}.egg-info)",
+        provider => powershell,
+        notify   => Openstack_hyper_v::Commands::Extract_archive["exe-installer-extract-${dependency_name}"],
       }
 
       exec { "move-platlib-${dependency_name}":
-        command  => "Copy-Item -Path ${::temp}\\PLATLIB\\* -Destination C:\\python27\\Lib\\site-packages\\ -Force -Recurse; Remove-Item -Path ${::temp}\\PLATLIB -Force -Recurse",
-        unless   => "exit Test-Path ${::temp}\\PLATLIB",
-        provider => powershell,
-        require  => Commands::Extract_archive["exe-installer-extract-${dependency_name}"],
+        command     => "Copy-Item -Path ${::temp}\\PLATLIB\\* -Destination C:\\python27\\Lib\\site-packages\\ -Force -Recurse; Remove-Item -Path ${::temp}\\PLATLIB -Force -Recurse",
+        unless      => "exit Test-Path ${::temp}\\PLATLIB",
+        provider    => powershell,
+        refreshonly => true,
+        subscribe   => Openstack_hyper_v::Commands::Extract_archive["exe-installer-extract-${dependency_name}"],
       }
 
       exec { "move-scripts-${dependency_name}":
-        command  => "Copy-Item -Path ${::temp}\\SCRIPTS\\* -Destination C:\\python27\\Scripts\\ -Force -Recurse; Remove-Item -Path ${::temp}\\SCRIPTS -Force -Recurse",
-        unless   => "exit Test-Path ${::temp}\\SCRIPTS",
-        provider => powershell,
-        require  => Commands::Extract_archive["exe-installer-extract-${dependency_name}"],
+        command     => "Copy-Item -Path ${::temp}\\SCRIPTS\\* -Destination C:\\python27\\Scripts\\ -Force -Recurse; Remove-Item -Path ${::temp}\\SCRIPTS -Force -Recurse",
+        unless      => "exit Test-Path ${::temp}\\SCRIPTS",
+        provider    => powershell,
+        refreshonly => true,
+        subscribe   => Openstack_hyper_v::Commands::Extract_archive["exe-installer-extract-${dependency_name}"],
       }
 
       exec { "move-headers-${dependency_name}":
-        command  => "Copy-Item -Path ${::temp}\\HEADERS\\* -Destination C:\\python27\\ -Force -Recurse; Remove-Item -Path ${::temp}\\HEADERS -Force -Recurse",
-        unless   => "exit Test-Path ${::temp}\\HEADERS",
-        provider => powershell,
-        require  => Commands::Extract_archive["exe-installer-extract-${dependency_name}"],
+        command     => "Copy-Item -Path ${::temp}\\HEADERS\\* -Destination C:\\python27\\ -Force -Recurse; Remove-Item -Path ${::temp}\\HEADERS -Force -Recurse",
+        unless      => "exit Test-Path ${::temp}\\HEADERS",
+        provider    => powershell,
+        refreshonly => true,
+        subscribe   => Openstack_hyper_v::Commands::Extract_archive["exe-installer-extract-${dependency_name}"],
       }
     }
     msi: {
+      if $remote_url {
+        openstack_hyper_v::commands::download{$local_path:
+          url    => $remote_url,
+          file   => $local_path,
+          before => Package[$dependency_name],
+        }
+      }
+
       package { $dependency_name:
         ensure          => installed,
         source          => $local_path,

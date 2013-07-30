@@ -41,6 +41,16 @@ class openstack_hyper_v::python {
     require  => [Package['Python 2.7.3'], Openstack_hyper_v::Commands::Download['get-pip.py']],
   }
 
+  windows_path {'C:\Python27':
+    ensure  => present,
+    require => Package['Python 2.7.3'],
+  }
+
+  windows_path {'C:\Python27\Scripts':
+    ensure => present,
+    require => Package['Python 2.7.3'],
+  }
+
   exec { 'install-ez':
     command  => "& C:\\Python27\\python.exe ${::temp}\\ez_setup.py",
     creates  => 'C:\Python27\Scripts\easy_install.exe',
@@ -70,8 +80,9 @@ class openstack_hyper_v::python {
   }
 
   exec { 'pywin32-postinstall-script':
-    command => 'C:/Python27/python.exe C:/Python27/Scripts/pywin32_postinstall.py -install',
-    require => Openstack_hyper_v::Python::Python_dependency['pywin32-217-py2.7'],
+    command     => 'C:/Python27/python.exe C:/Python27/Scripts/pywin32_postinstall.py -install',
+    refreshonly => true,
+    subscribe   => Openstack_hyper_v::Python::Python_dependency['pywin32-217-py2.7'],
   }
 
   openstack_hyper_v::python::python_dependency{ 'greenlet-0.4.0-py2.7':
@@ -92,7 +103,7 @@ class openstack_hyper_v::python {
     type       => pip,
   }
 
-  openstack_hyper_v::python::python_dependency{ 'webob':
+  openstack_hyper_v::python::python_dependency{ 'WebOb':
     type       => pip,
   }
 
@@ -100,23 +111,23 @@ class openstack_hyper_v::python {
     type       => pip,
   }
 
-  openstack_hyper_v::python::python_dependency{ 'paste':
+  openstack_hyper_v::python::python_dependency{ 'Paste':
     type       => pip,
   }
 
-  openstack_hyper_v::python::python_dependency{ 'pastedeploy':
+  openstack_hyper_v::python::python_dependency{ 'PasteDeploy':
     type       => pip,
   }
 
-  openstack_hyper_v::python::python_dependency{ 'routes':
+  openstack_hyper_v::python::python_dependency{ 'Routes':
     type       => pip,
   }
 
-  openstack_hyper_v::python::python_dependency{ 'wmi':
+  openstack_hyper_v::python::python_dependency{ 'WMI':
     type       => pip,
   }
 
-  openstack_hyper_v::python::python_dependency{ 'sqlalchemy':
+  openstack_hyper_v::python::python_dependency{ 'SQLAlchemy':
     type       => pip,
   }
 

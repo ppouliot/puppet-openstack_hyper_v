@@ -6,7 +6,6 @@
 #
 # Actions:
 #
-
 class openstack_hyper_v::tools::7zip(
 
   $file    = '7z930-x64.msi',
@@ -16,7 +15,7 @@ class openstack_hyper_v::tools::7zip(
 
   commands::download { '7zip':
     url  => $url,
-    file => $file,
+    file => "${::temp}\\${file}",
   }
 
 

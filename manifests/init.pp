@@ -85,22 +85,22 @@ class openstack_hyper_v (
 
   # Tools
   class { 'openstack_hyper_v::tools::7zip': }
-  class { 'openstack_hyper_v::tools::vexasoftcmdlet': }
-  class { 'openstack_hyper_v::tools::git': }
+  #class { 'openstack_hyper_v::tools::vexasoftcmdlet': }
+  #class { 'openstack_hyper_v::tools::git': }
 
   # Optional
-  class { 'openstack_hyper_v::java': }
-  class { 'openstack_hyper_v::tools::notepadplusplus': }
-  class { 'openstack_hyper_v::tools::google_chrome': }
+  #class { 'openstack_hyper_v::java': }
+  #class { 'openstack_hyper_v::tools::notepadplusplus': }
+  #class { 'openstack_hyper_v::tools::google_chrome': }
   #class {' openstack_hyper_v::tools::visualcplusplus2010': }
   #class { 'openstack_hyper_v::tools::visualcplusplus2012': }
-  class { 'openstack_hyper_v::tools::freerdp': }
+  #class { 'openstack_hyper_v::tools::freerdp': }
 
   # Python Stack
   class { 'openstack_hyper_v::python': 
    require => Class['openstack_hyper_v::tools::7zip'],
   }
    
-  class { 'openstack_hyper_v::openstack::folders':}
+  #class { 'openstack_hyper_v::openstack::folders':}
 
 }

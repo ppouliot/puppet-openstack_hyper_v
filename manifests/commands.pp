@@ -6,15 +6,12 @@
 #
 # Actions:
 #
-
 class openstack_hyper_v::commands{
-  define download($url,$file){
+  define download($url, $file){
     exec{ $name:
-      # Depreciated: PP -> REmoving to test new Powershell metnod for downloading content.
-      # command => "Invoke-WebRequest -UseBasicParsing -uri ${url} -OutFile ${file}",
-      command  => "(new-object Net.WebClient).DownloadFile(\'${url}\',\'${::temp}\\${file}\')",
-      creates  => "${::temp}\\${file}",
-      unless   => "exit !(Get-Item ${::temp}\\${file})",
+      command  => "(new-object Net.WebClient).DownloadFile(\'${url}\',\'${file}\')",
+      creates  => $file,
+      unless   => "exit !(Get-Item ${file})",
       provider => powershell,
     }
   }
@@ -70,10 +67,11 @@ class openstack_hyper_v::commands{
 
   define extract_archive ($archivefile){
     exec {"7z_extract_${name}":
-      command => "7z.exe x -y ${::temp}\\${archivefile}",
-      path    => "${programw6432}\\7-Zip;${::path}",
-      cwd     => $::temp,
-      require => Package['7-Zip 9.30 (x64 edition)'],
+      command     => "7z.exe x -y \"${archivefile}\"",
+      path        => "${programw6432}\\7-Zip;${::path}",
+      cwd         => $::temp,
+      refreshonly => true,
+      require     => Package['7-Zip 9.30 (x64 edition)'],
     }
   }
 }
