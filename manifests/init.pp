@@ -84,7 +84,6 @@ class openstack_hyper_v (
   class { 'openstack_hyper_v::base::rdp': }
 
   # Tools
-  class { 'openstack_hyper_v::tools::7zip': }
   #class { 'openstack_hyper_v::tools::vexasoftcmdlet': }
   #class { 'openstack_hyper_v::tools::git': }
 
