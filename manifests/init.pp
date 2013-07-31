@@ -96,10 +96,7 @@ class openstack_hyper_v (
   #class { 'openstack_hyper_v::tools::visualcplusplus2012': }
   #class { 'openstack_hyper_v::tools::freerdp': }
 
-  # Python Stack
-  class { 'openstack_hyper_v::python': 
-   require => Class['openstack_hyper_v::tools::7zip'],
-  }
+  class { 'openstack_hyper_v::nova_dependencies': }
    
   #class { 'openstack_hyper_v::openstack::folders':}
 
