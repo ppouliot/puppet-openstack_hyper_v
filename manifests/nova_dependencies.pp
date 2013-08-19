@@ -1,88 +1,430 @@
-class openstack_hyper_v::nova_dependencies {
+class openstack_hyper_v::nova_dependencies 
+(
+  $py_nova_source,
+  $py_nova_url = undef,
+) inherits openstack_hyper_v::params {
 
   Class['openstack_hyper_v::python::install'] -> Openstack_hyper_v::Python::Dependency<| |>
 
-  class { 'openstack_hyper_v::python::install':}
-
-  openstack_hyper_v::python::dependency{ 'Python 2.7 M2Crypto-0.21.1':
-    remote_url => 'http://chandlerproject.org/pub/Projects/MeTooCrypto/M2Crypto-0.21.1.win32-py2.7.msi',
-    type       => msi,
+  class { 'openstack_hyper_v::python::install': 
+    python_source      => $python_source,
+    python_installdir  => $python_installdir,
+    easyinstall_source => $easyinstall_source,
+    pip_source         => $pip_source,
   }
 
-  openstack_hyper_v::python::dependency{ 'MySQL_python-1.2.3-py2.7':
-    remote_url => 'http://www.codegood.com/download/10/',
+  openstack_hyper_v::python::dependency{ 'M2Crypto':
+    remote_url => $py_m2crypto_url,
+    source     => $py_m2crypto_source,
+    version    => $py_m2crypto_version,
     type       => exe,
   }
 
-  openstack_hyper_v::python::dependency{ 'pycrypto-2.6-py2.7':
-    remote_url => 'http://www.voidspace.org.uk/downloads/pycrypto26/pycrypto-2.6.win32-py2.7.exe',
+  openstack_hyper_v::python::dependency{ 'MySQL-python':
+    remote_url => $py_mysql_url,
+    source     => $py_mysql_source,
+    version    => $py_mysql_version,
     type       => exe,
   }
 
-  openstack_hyper_v::python::dependency{ 'pywin32-217-py2.7':
-    remote_url => 'http://sourceforge.net/projects/pywin32/files/pywin32/Build%20217/pywin32-217.win32-py2.7.exe/download',
+  openstack_hyper_v::python::dependency{ 'pycrypto':
+    remote_url => $py_pycrypto_url,
+    source     => $py_pycrypto_source,
+    version    => $py_pycrypto_version,
+    type       => exe,
+  }
+
+  openstack_hyper_v::python::dependency{ 'pywin32':
+    remote_url => $py_pywin32_url,
+    source     => $py_pywin32_source,
+    version    => $py_pywin32_version,
     type       => exe,
   }
 
   exec { 'pywin32-postinstall-script':
-    command     => 'C:/Python27/python.exe C:/Python27/Scripts/pywin32_postinstall.py -install',
+    command     => "${python_installdir}/python.exe ${python_installdir}/Scripts/pywin32_postinstall.py -install",
     refreshonly => true,
-    subscribe   => Openstack_hyper_v::Python::Dependency['pywin32-217-py2.7'],
+    subscribe   => Openstack_hyper_v::Python::Dependency['pywin32'],
   }
 
-  openstack_hyper_v::python::dependency{ 'greenlet-0.4.0-py2.7':
-    remote_url => 'https://pypi.python.org/packages/2.7/g/greenlet/greenlet-0.4.0.win32-py2.7.exe#md5=910896116b1e4fd527b8afaadc7132f3',
+  openstack_hyper_v::python::dependency{ 'greenlet':
+    remote_url => $py_greenlet_url,
+    source     => $py_greenlet_source,
+    version    => $py_greenlet_version,
     type       => exe,
   }
 
-  openstack_hyper_v::python::dependency{ 'lxml-2.3-py2.7':
-    remote_url => 'https://pypi.python.org/packages/2.7/l/lxml/lxml-2.3.win32-py2.7.exe#md5=9c02aae672870701377750121f5a6f84',
+  openstack_hyper_v::python::dependency{ 'lxml':
+    remote_url => $py_lxml_url,
+    source     => $py_lxml_source,
+    version    => $py_lxml_version,
     type       => exe,
   }
 
   openstack_hyper_v::python::dependency{ 'eventlet':
+    source  => $py_eventlet_source,
+    version => $py_eventlet_version,
     type    => pip,
-    require => Openstack_hyper_v::Python::Dependency['greenlet-0.4.0-py2.7'],
+    require => Openstack_hyper_v::Python::Dependency['greenlet'],
   }
 
   openstack_hyper_v::python::dependency{ 'iso8601':
-    type => pip,
+    source  => $py_iso8601_source,
+    version => $py_iso8601_version,
+    type    => pip,
   }
 
   openstack_hyper_v::python::dependency{ 'WebOb':
-    type => pip,
+    source  => $py_webob_source,
+    version => $py_webob_version,
+    type    => pip,
   }
 
   openstack_hyper_v::python::dependency{ 'netaddr':
-    type => pip,
+    source  => $py_netaddr_source,
+    version => $py_netaddr_version,
+    type    => pip,
   }
 
   openstack_hyper_v::python::dependency{ 'Paste':
-    type => pip,
+    source  => $py_paste_source,
+    version => $py_paste_version,
+    type    => pip,
   }
 
   openstack_hyper_v::python::dependency{ 'PasteDeploy':
-    type => pip,
+    source  => $py_pastedeploy_source,
+    version => $py_pastedeploy_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'repoze.lru':
+    source  => $py_repoze_lru_source,
+    version => $py_repoze_lru_version,
+    type    => pip,
   }
 
   openstack_hyper_v::python::dependency{ 'Routes':
-    type => pip,
+    source  => $py_routes_source,
+    version => $py_routes_version,
+    type    => pip,
+    require => Openstack_hyper_v::Python::Dependency['repoze.lru'],
   }
 
   openstack_hyper_v::python::dependency{ 'WMI':
-    type => pip,
+    source  => $py_wmi_source,
+    version => $py_wmi_version,
+    type    => pip,
   }
 
   openstack_hyper_v::python::dependency{ 'SQLAlchemy':
-    type => pip,
+    source  => $py_sqlalchemy_source,
+    version => $py_sqlalchemy_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'decorator':
+    source  => $py_decorator_source,
+    version => $py_decorator_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'Tempita':
+    source  => $py_tempita_source,
+    version => $py_tempita_version,
+    type    => pip,
   }
 
   openstack_hyper_v::python::dependency{ 'sqlalchemy-migrate':
-    type => pip,
+    source  => $py_sqlalchemy_migrate_source,
+    version => $py_sqlalchemy_migrate_version,
+    type    => pip,
+    require => [Openstack_hyper_v::Python::Dependency['SQLAlchemy'],
+                Openstack_hyper_v::Python::Dependency['decorator'],
+                Openstack_hyper_v::Python::Dependency['Tempita'],],
+  }
+
+  openstack_hyper_v::python::dependency{ 'amqp':
+    source  => $py_amqp_source,
+    version => $py_amqp_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'anyjson':
+    source  => $py_anyjson_source,
+    version => $py_anyjson_version,
+    type    => pip,
   }
 
   openstack_hyper_v::python::dependency{ 'kombu':
-    type => pip,
+    source  => $py_kombu_source,
+    version => $py_kombu_version,
+    type    => pip,
+    require => [Openstack_hyper_v::Python::Dependency['anyjson'],
+                Openstack_hyper_v::Python::Dependency['amqp']],
+  }
+
+  openstack_hyper_v::python::dependency{ 'boto':
+    source  => $py_boto_source,
+    version => $py_boto_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'amqplib':
+    source  => $py_amqplib_source,
+    version => $py_amqplib_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'Markdown':
+    source  => $py_markdown_source,
+    version => $py_markdown_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'Cheetah':
+    source  => $py_cheetah_source,
+    version => $py_cheetah_version,
+    type    => pip,
+    require => Openstack_hyper_v::Python::Dependency['Markdown'],
+  }
+
+  openstack_hyper_v::python::dependency{ 'suds':
+    source  => $py_suds_source,
+    version => $py_suds_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'paramiko':
+    source  => $py_paramiko_source,
+    version => $py_paramiko_version,
+    type    => pip,
+    require => Openstack_hyper_v::Python::Dependency['pycrypto'],
+  }
+
+  openstack_hyper_v::python::dependency{ 'pyasn1':
+    source  => $py_pyasn1_source,
+    version => $py_pyasn1_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'Babel':
+    source  => $py_babel_source,
+    version => $py_babel_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'httplib2':
+    source  => $py_httplib2_source,
+    version => $py_httplib2_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'setuptools-git':
+    source  => $py_setuptools_git_source,
+    version => $py_setuptools_git_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'd2to1':
+    source  => $py_d2to1_source,
+    version => $py_d2to1_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'pbr':
+    source  => $py_pbr_source,
+    version => $py_pbr_version,
+    type    => pip,
+    require => [Openstack_hyper_v::Python::Dependency['d2to1'],
+                Openstack_hyper_v::Python::Dependency['setuptools-git']],
+
+  }
+
+  openstack_hyper_v::python::dependency{ 'requests':
+    source  => $py_requests_source,
+    version => $py_requests_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'simplejson':
+    source  => $py_simplejson_source,
+    version => $py_simplejson_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'python-cinderclient':
+    source  => $py_python_cinderclient_source,
+    version => $py_python_cinderclient_version,
+    type    => pip,
+    require => [Openstack_hyper_v::Python::Dependency['prettytable'],
+                Openstack_hyper_v::Python::Dependency['requests'],
+                Openstack_hyper_v::Python::Dependency['simplejson'],],
+  }
+
+  openstack_hyper_v::python::dependency{ 'python-quantumclient':
+    source  => $py_python_quantumclient_source,
+    version => $py_python_quantumclient_version,
+    type    => pip,
+    require => [Openstack_hyper_v::Python::Dependency['d2to1'],
+                Openstack_hyper_v::Python::Dependency['pbr'],
+                Openstack_hyper_v::Python::Dependency['cliff'],
+                Openstack_hyper_v::Python::Dependency['httplib2'],
+                Openstack_hyper_v::Python::Dependency['iso8601'],
+                Openstack_hyper_v::Python::Dependency['prettytable'],
+                Openstack_hyper_v::Python::Dependency['pyparsing'],
+                Openstack_hyper_v::Python::Dependency['simplejson'],],
+  }
+
+  openstack_hyper_v::python::dependency{ 'six':
+    source  => $py_six_source,
+    version => $py_six_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'python-keystoneclient':
+    source  => $py_python_keystoneclient_source,
+    version => $py_python_keystoneclient_version,
+    type    => pip,
+    require => [Openstack_hyper_v::Python::Dependency['d2to1'],
+                Openstack_hyper_v::Python::Dependency['pbr'],
+                Openstack_hyper_v::Python::Dependency['iso8601'],
+                Openstack_hyper_v::Python::Dependency['prettytable'],
+                Openstack_hyper_v::Python::Dependency['requests'],
+                Openstack_hyper_v::Python::Dependency['simplejson'],
+                Openstack_hyper_v::Python::Dependency['six'],
+                Openstack_hyper_v::Python::Dependency['oslo.config'],],
+  }
+
+  openstack_hyper_v::python::dependency{ 'python-glanceclient':
+    source  => $py_python_glanceclient_source,
+    version => $py_python_glanceclient_version,
+    type    => pip,
+    require => [Openstack_hyper_v::Python::Dependency['prettytable'],
+                Openstack_hyper_v::Python::Dependency['python-keystoneclient'],
+                Openstack_hyper_v::Python::Dependency['pyopenssl'],
+                Openstack_hyper_v::Python::Dependency['warlock'],],
+  }
+
+  openstack_hyper_v::python::dependency{ 'stevedore':
+    source  => $py_stevedore_source,
+    version => $py_stevedore_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'numpy':
+    source     => $py_numpy_source,
+    remote_url => $py_numpy_url,
+    version    => $py_numpy_version,
+    type       => exe,
+  }
+
+  openstack_hyper_v::python::dependency{ 'websockify':
+    source  => $py_websockify_source,
+    version => $py_websockify_version,
+    type    => pip,
+    require => Openstack_hyper_v::Python::Dependency['numpy'],
+  }
+
+  openstack_hyper_v::python::dependency{ 'oslo.config':
+    source  => $py_oslo_config_source,
+    version => $py_oslo_config_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'jsonschema':
+    source  => $py_jsonschema_source,
+    version => $py_jsonschema_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'jsonpointer':
+    source  => $py_jsonpointer_source,
+    version => $py_jsonpointer_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'jsonpatch':
+    source  => $py_jsonpatch_source,
+    version => $py_jsonpatch_version,
+    type    => pip,
+    require => Openstack_hyper_v::Python::Dependency['jsonpointer'],
+  }
+
+  openstack_hyper_v::python::dependency{ 'warlock':
+    source  => $py_warlock_source,
+    version => $py_warlock_version,
+    type    => pip,
+    require => [Openstack_hyper_v::Python::Dependency['jsonschema'], 
+                Openstack_hyper_v::Python::Dependency['jsonpatch']],
+  }
+
+  openstack_hyper_v::python::dependency{ 'prettytable':
+    source  => $py_prettytable_source,
+    version => $py_prettytable_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'cmd2':
+    source   => $py_cmd2_source,
+    version  => $py_cmd2_version,
+    type     => pip,
+    require => Openstack_hyper_v::Python::Dependency['pyparsing'],
+  }
+
+  openstack_hyper_v::python::dependency{ 'pyparsing':
+    source  => $py_pyparsing_source,
+    version => $py_pyparsing_version,
+    type    => pip,
+  }
+
+  openstack_hyper_v::python::dependency{ 'cliff':
+    source  => $py_cliff_source,
+    version => $py_cliff_version,
+    type    => pip,
+    require => [Openstack_hyper_v::Python::Dependency['prettytable'], 
+                Openstack_hyper_v::Python::Dependency['cmd2'],
+                Openstack_hyper_v::Python::Dependency['pyparsing'],],
+  }
+
+  openstack_hyper_v::python::dependency{ 'pyopenssl':
+    source     => $py_pyopenssl_source,
+    remote_url => $py_pyopenssl_url,
+    type       => egg,
+  }
+
+  openstack_hyper_v::python::dependency{ 'nova':
+    source     => $py_nova_source,
+    remote_url => $py_nova_url,
+    type       => egg,
+    require    => [Openstack_hyper_v::Python::Dependency['SQLAlchemy'],
+                   Openstack_hyper_v::Python::Dependency['Cheetah'],
+                   Openstack_hyper_v::Python::Dependency['amqplib'],
+                   Openstack_hyper_v::Python::Dependency['anyjson'],
+                   Openstack_hyper_v::Python::Dependency['boto'],
+                   Openstack_hyper_v::Python::Dependency['eventlet'],
+                   Openstack_hyper_v::Python::Dependency['kombu'],
+                   Openstack_hyper_v::Python::Dependency['lxml'],
+                   Openstack_hyper_v::Python::Dependency['Routes'],
+                   Openstack_hyper_v::Python::Dependency['WebOb'],
+                   Openstack_hyper_v::Python::Dependency['greenlet'],
+                   Openstack_hyper_v::Python::Dependency['PasteDeploy'],
+                   Openstack_hyper_v::Python::Dependency['Paste'],
+                   Openstack_hyper_v::Python::Dependency['sqlalchemy-migrate'],
+                   Openstack_hyper_v::Python::Dependency['netaddr'],
+                   Openstack_hyper_v::Python::Dependency['suds'],
+                   Openstack_hyper_v::Python::Dependency['paramiko'],
+                   Openstack_hyper_v::Python::Dependency['pyasn1'],
+                   Openstack_hyper_v::Python::Dependency['Babel'],
+                   Openstack_hyper_v::Python::Dependency['iso8601'],
+                   Openstack_hyper_v::Python::Dependency['httplib2'],
+                   Openstack_hyper_v::Python::Dependency['setuptools-git'],
+                   Openstack_hyper_v::Python::Dependency['python-cinderclient'],
+                   Openstack_hyper_v::Python::Dependency['python-quantumclient'],
+                   Openstack_hyper_v::Python::Dependency['python-glanceclient'],
+                   Openstack_hyper_v::Python::Dependency['stevedore'],
+                   Openstack_hyper_v::Python::Dependency['websockify'],
+                   Openstack_hyper_v::Python::Dependency['oslo.config'],],
   }
 }
 

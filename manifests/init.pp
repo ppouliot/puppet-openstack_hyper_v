@@ -18,6 +18,8 @@
 #   IP address of the physical adapter where the switch will be bound
 # [*virtual_switch_os_managed*]
 #   Specifies if the management OS is to have access to the physical adapter
+# [*nova_source*]
+#   System path to egg distribution of nova
 # [*purge_nova_config*]
 #   Specifies if the nova_config file will only have values configured with
 #   puppet.
@@ -31,6 +33,7 @@
 #    virtual_switch_name       => 'br100',
 #    virtual_switch_address    => '192.168.1.133',
 #    virtual_switch_os_managed => true,
+#    nova_source               => 'F:\Shared\Software\OpenStack\nova-2013.1.2-py2.7.egg'
 #  }
 #
 # == Authors
@@ -45,6 +48,7 @@ class openstack_hyper_v (
   $virtual_switch_address    = $::ipaddress,
   $virtual_switch_os_managed = true,
   # Others
+  $nova_source,
   $purge_nova_config         = true,
 ){
 
@@ -77,26 +81,12 @@ class openstack_hyper_v (
     'DEFAULT/compute_driver': value => 'nova.virt.hyperv.driver.HyperVDriver';
   }
 
+  class { 'openstack_hyper_v::nova_dependencies':
+    $py_nova_source = $nova_soure,
+  }
 
-  class { 'openstack_hyper_v::base::ntp': }
-  class { 'openstack_hyper_v::base::disable_firewalls': }
-  class { 'openstack_hyper_v::base::enable_auto_update': }
-  class { 'openstack_hyper_v::base::rdp': }
-
-  # Tools
-  #class { 'openstack_hyper_v::tools::vexasoftcmdlet': }
-  #class { 'openstack_hyper_v::tools::git': }
-
-  # Optional
-  #class { 'openstack_hyper_v::java': }
-  #class { 'openstack_hyper_v::tools::notepadplusplus': }
-  #class { 'openstack_hyper_v::tools::google_chrome': }
-  #class {' openstack_hyper_v::tools::visualcplusplus2010': }
-  #class { 'openstack_hyper_v::tools::visualcplusplus2012': }
-  #class { 'openstack_hyper_v::tools::freerdp': }
-
-  class { 'openstack_hyper_v::nova_dependencies': }
-   
-  #class { 'openstack_hyper_v::openstack::folders':}
-
+  #class { 'openstack_hyper_v::base::ntp': }
+  #class { 'openstack_hyper_v::base::disable_firewalls': }
+  #class { 'openstack_hyper_v::base::enable_auto_update': }
+  #class { 'openstack_hyper_v::base::rdp': }
 }
