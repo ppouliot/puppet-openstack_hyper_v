@@ -7,28 +7,27 @@
 # Actions:
 #
 class openstack_hyper_v::openstack::folders {
-
-  file { 'c:\openstack':
+  file { 'C:/OpenStack':
     ensure => directory,
   }
 
-  file { 'c:\openstack\log':
-    ensure => directory,
+  file { 'C:/OpenStack/scripts': 
+    ensure  => directory,
+    require => File['C:/OpenStack'],
   }
 
-  file { 'c:\openstack\instances':
-    ensure => directory,
+  file { 'C:/OpenStack/etc':
+    ensure  => directory,
+    require => File['C:/OpenStack'],
   }
 
-  file { 'c:\openstack\vhd':
-    ensure => directory,
+  file { 'C:/OpenStack/Log':
+    ensure  => directory,
+    require => File['C:/OpenStack'],
   }
 
-  file { 'c:\openstack\scripts':
-    ensure => directory,
+  file { 'C:/OpenStack/instances':
+    ensure  => directory,
+    require => File['C:/OpenStack'],
   }
-  file { 'c:\etc':
-    ensure => directory,
-  }
-
 }

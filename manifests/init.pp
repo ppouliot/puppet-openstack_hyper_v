@@ -5,6 +5,8 @@
 #
 # === Parameters
 #
+# [*nova_compute*]
+#   Enable or not nova compute service. Defaults to true.
 # [*live_migration*]
 #   Specify if the compute node will have the live migration enabled
 # [*live_migration_type*]
@@ -39,6 +41,8 @@
 # == Authors
 #
 class openstack_hyper_v (
+  # Services
+  $nova_compute              = true,
   # Live Migration
   $live_migration            = false,
   $live_migration_type       = 'Kerberos',
@@ -51,6 +55,11 @@ class openstack_hyper_v (
   $nova_source,
   $purge_nova_config         = true,
 ){
+  Class['openstack_hyper_v::openstack::folders'] -> Nova_config <| |>
+  Nova_config<| |> -> File['C:/OpenStack/etc/nova.conf']
+  Nova_config<| |> ~> Service['nova-compute']
+
+  class { 'openstack_hyper_v::openstack::folders': }
 
   class { 'openstack_hyper_v::base::hyper_v': }
 
@@ -77,16 +86,48 @@ class openstack_hyper_v (
     }
   }
 
+  file { 'C:/OpenStack/etc/nova.conf':
+    ensure => file,
+  }
+
   nova_config {
     'DEFAULT/compute_driver': value => 'nova.virt.hyperv.driver.HyperVDriver';
   }
 
   class { 'openstack_hyper_v::nova_dependencies':
-    $py_nova_source = $nova_soure,
+    py_nova_source => $nova_source,
   }
 
-  #class { 'openstack_hyper_v::base::ntp': }
-  #class { 'openstack_hyper_v::base::disable_firewalls': }
-  #class { 'openstack_hyper_v::base::enable_auto_update': }
-  #class { 'openstack_hyper_v::base::rdp': }
+  file { 'C:/OpenStack/scripts/NovaComputeWindowsService.py':
+    ensure  => file,
+    source  => "puppet:///modules/openstack_hyper_v/NovaComputeWindowsService.py",
+    require => Class['openstack_hyper_v::openstack::folders'],
+  }
+
+  openstack_hyper_v::python::windows_service { 'nova-compute':
+    ensure      => present,
+    description => 'OpenStack Nova compute service for Hyper-V',
+    start       => automatic,
+    arguments   => '--config-file=C:\OpenStack\etc\nova.conf',
+    script      => 'C:\OpenStack\scripts\NovaComputeWindowsService.NovaComputeWindowsService',
+    require     => File['C:/OpenStack/scripts/NovaComputeWindowsService.py'],
+  }
+
+  if $nova_compute {
+    $service_state = 'running'
+  }else{
+    $service_state = 'stopped'
+  }
+
+  service { 'nova-compute':
+    name       => 'nova-compute',
+    ensure     => $service_state,
+    enable     => true,
+    hasrestart => true,
+    require    => [Openstack_hyper_v::Python::Windows_service['nova-compute'],
+                   Class['openstack_hyper_v::base::hyper_v'],
+                   Class['openstack_hyper_v::base::live_migration'],
+                   Virtual_switch[$virtual_switch_name],
+                   Class['openstack_hyper_v::nova_dependencies'],],
+  }
 }
