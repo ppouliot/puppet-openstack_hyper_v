@@ -110,7 +110,11 @@ class openstack_hyper_v (
     start       => automatic,
     arguments   => '--config-file=C:\OpenStack\etc\nova.conf',
     script      => 'C:\OpenStack\scripts\NovaComputeWindowsService.NovaComputeWindowsService',
-    require     => File['C:/OpenStack/scripts/NovaComputeWindowsService.py'],
+    require     => [File['C:/OpenStack/scripts/NovaComputeWindowsService.py'],
+                    Class['openstack_hyper_v::base::hyper_v'],
+                    Class['openstack_hyper_v::base::live_migration'],
+                    Virtual_switch[$virtual_switch_name],
+                    Class['openstack_hyper_v::nova_dependencies'],],
   }
 
   if $nova_compute {
@@ -124,10 +128,6 @@ class openstack_hyper_v (
     ensure     => $service_state,
     enable     => true,
     hasrestart => true,
-    require    => [Openstack_hyper_v::Python::Windows_service['nova-compute'],
-                   Class['openstack_hyper_v::base::hyper_v'],
-                   Class['openstack_hyper_v::base::live_migration'],
-                   Virtual_switch[$virtual_switch_name],
-                   Class['openstack_hyper_v::nova_dependencies'],],
+    require    => Openstack_hyper_v::Python::Windows_service['nova-compute'],
   }
 }
