@@ -52,7 +52,7 @@ class openstack_hyper_v::base::live_migration(
 
     exec{ 'set-authentication-type':
       command  => "Set-VMHost -VirtualMachineMigrationAuthenticationType ${authentication_type}",
-      unless   => "if (!(Get-VMHost).VirtualMachineMigrationAuthenticationType -eq [Microsoft.HyperV.PowerShell.MigrationAuthenticationType]::${authentication_type}) { exit 1 }",
+      unless   => "if (!((Get-VMHost).VirtualMachineMigrationAuthenticationType -eq [Microsoft.HyperV.PowerShell.MigrationAuthenticationType]::${authentication_type})) { exit 1 }",
       provider => powershell,
     }
 
