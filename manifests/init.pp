@@ -43,6 +43,17 @@
 class openstack_hyper_v (
   # Services
   $nova_compute              = true,
+  # General
+  $network_manager           = 'nova.network.manager.FlatDHCPManager',
+  $rabbit_host,
+  $rabbit_port,
+  $rabbit_user,
+  $rabbit_password,
+  $rabbit_virtual_host       = '/',
+  $glance_api_servers        = 'localhost:9393',
+  $instances_path            = 'C:\OpenStack\instances',
+  $mkisofs_cmd               = undef,
+  $qemu_img_cmd              = undef,
   # Live Migration
   $live_migration            = false,
   $live_migration_type       = 'Kerberos',
@@ -54,12 +65,20 @@ class openstack_hyper_v (
   # Others
   $nova_source,
   $purge_nova_config         = true,
+  $verbose                   = false,
+  $debug                     = false
 ){
   Class['openstack_hyper_v::openstack::folders'] -> Nova_config <| |>
   Nova_config<| |> -> File['C:/OpenStack/etc/nova.conf']
   Nova_config<| |> ~> Service['nova-compute']
 
   class { 'openstack_hyper_v::openstack::folders': }
+
+  file { 'C:/OpenStack/etc/policy.json':
+    ensure  => file,
+    source  => "puppet:///modules/openstack_hyper_v/policy.json",
+    require => Class['openstack_hyper_v::openstack::folders'],
+  }
 
   class { 'openstack_hyper_v::base::hyper_v': }
 
@@ -91,7 +110,39 @@ class openstack_hyper_v (
   }
 
   nova_config {
-    'DEFAULT/compute_driver': value => 'nova.virt.hyperv.driver.HyperVDriver';
+    # Network
+    'DEFAULT/network_manager':                        value => $network_manager;
+    # Rabbit
+    'DEFAULT/rabbit_userid':                          value => $rabbit_user;
+    'DEFAULT/rabbit_password':                        value => $rabbit_password;
+    'DEFAULT/rabbit_virtual_host':                    value => $rabbit_virtual_host;
+    'DEFAULT/rabbit_host':                            value => $rabbit_host;
+    'DEFAULT/rabbit_port':                            value => $rabbit_port;
+    # Glance
+    'DEFAULT/image_service':                          value => 'nova.image.glance.GlanceImageService';
+    'DEFAULT/glance_api_servers':                     value => $glance_api_servers;
+    # General  
+    'DEFAULT/logdir':                                 value => 'C:\OpenStack\Log';
+    'DEFAULT/verbose':                                value => $verbose;
+    'DEFAULT/debug':                                  value => $debug;
+    'DEFAULT/auth_strategy':                          value => 'keystone';
+    'DEFAULT/volume_api_class':                       value => 'nova.volume.cinder.API';
+    'DEFAULT/rpc_backend':                            value => 'nova.openstack.common.rpc.impl_kombu';
+    'DEFAULT/use_cow_images':                         value => 'true';
+    'DEFAULT/force_config_drive':                     value => 'false';
+    'DEFAULT/config_drive_inject_password':           value => 'false';
+    'DEFAULT/policy_file':                            value => 'C:\OpenStack\etc\policy.json';
+    'DEFAULT/allow_resize_to_same_host':              value => 'true';
+    'DEFAULT/running_deleted_instance_action':        value => 'reap';
+    'DEFAULT/running_deleted_instance_poll_interval': value => 120;
+    'DEFAULT/resize_confirm_window':                  value => 5;
+    # Hyper-V
+    'DEFAULT/vswitch_name':                           value => $virtual_switch_name;
+    'DEFAULT/instances_path':                         value => $instances_path;
+    'DEFAULT/limit_cpu_features':                     value => 'false';
+    'DEFAULT/mkisofs_cmd':                            value => $mkisofs_cmd;
+    'DEFAULT/qemu_img_cmd':                           value => $qemu_img_cmd;
+    'DEFAULT/compute_driver':                         value => 'nova.virt.hyperv.driver.HyperVDriver';
   }
 
   class { 'openstack_hyper_v::nova_dependencies':
