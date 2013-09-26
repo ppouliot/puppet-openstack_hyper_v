@@ -13,29 +13,45 @@ Basic usage
 To configure openstack_hyper_v compute on a windows/hyper-v server
 
     class { 'openstack_hyper_v':
+      # Rabbit
+      rabbit_host               => 'rabbit',
+      rabbit_password           => hiera('rabbit_password'),
+      rabbit_user               => 'nova',
+      rabbit_virtual_host       => '/',
+      # Glance
+      glance_api_servers        => '192.168.0.120:9393',
+      # Live Migration
       live_migration            => true,
       live_migration_type       => 'Kerberos',
       live_migration_networks   => '192.168.0.0/24',
+      # Virtual Switch
       virtual_switch_name       => 'br100',
-      virtual_switch_address    => '192.168.1.133',
+      virtual_switch_address    => inline_template("<%= require 'resolv'; Resolv.new.getaddress(@fqdn)%>"),
       virtual_switch_os_managed => true,
+      # General
+      instances_path            => 'D:\\',
+      verbose                   => false,
+      debug                     => false,
+      nova_compute              => true,
+      nova_source               => 'H:\Shared\openstack\nova-2013.1.2-py2.7.egg',
+      mkisofs_cmd               => 'H:\Shared\openstack\tools\mkisofs.exe',
+      qemu_img_cmd              => 'H:\Shared\openstack\tools\qemu-img.exe';
     }
-
-
-
 
 Windows Features
 ----------------
 
-To enable a openstack_hyper_v feature
+To enable a windows feature
 
-openstack_hyper_v::enable_feature{"some_windows_feature"}
+  openstack_hyper_v::base::windows_feature {'Windows-Feature-Name':
+     ensure  => present,
+  }
 
-To remove a openstack_hyper_v feature
+To remove a windows feature
 
-
-openstack_hyper_v::remove_feature{"some_openstack_hyper_v_feature"}
- 
+  openstack_hyper_v::base::windows_feature {'Windows-Feature-Name':
+     ensure  => absent,
+  }
 
 Contributors
 ------------
