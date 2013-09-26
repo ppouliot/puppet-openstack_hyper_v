@@ -1,0 +1,8 @@
+fixtures:
+  repositories:
+    powershell:   git://github.com/joshcooper/puppetlabs-powershell.git
+    registry:     git://github.com/puppetlabs/puppetlabs-registry.git
+    inifile:      git://github.com/cprice-puppet/puppetlabs-inifile.git
+    windows_path: git://github.com/basti1302/puppet-windows-path.git    
+  symlinks:
+    openstack_hyper_v: "#{source_dir}"
