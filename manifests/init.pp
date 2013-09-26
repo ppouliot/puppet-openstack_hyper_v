@@ -7,6 +7,27 @@
 #
 # [*nova_compute*]
 #   Enable or not nova compute service. Defaults to true.
+# [*network_manager*]
+# [*rabbit_host*]
+#   Location of rabbitmq installation. Optional. Defaults to localhost.
+# [*rabbit_port*]
+#   Port for rabbitmq instance. Optional. Defaults to 5672.
+# [*rabbit_userid*]
+#   User used to connect to rabbitmq. Optional. Defaults to guest.
+# [*rabbit_password*]
+#   Password used to connect to rabbitmq. Optional. Defaults to guest.
+# [*rabbit_virtual_host*]
+#   Location of rabbitmq installation. Optional. Defaults to localhost.
+# [*image_service*]
+#   Service used to search for and retrieve images. Optional. Defaults to 
+#   'nova.image.local.LocalImageService'
+# [*glance_api_servers*]
+#   List of addresses for api servers. Optional. Defaults to localhost:9292
+# [*instances_path*]
+# [*mkisofs_cmd*]
+# [*qemu_img_cmd*]
+# [*auth_strategy*]
+#   Auth strategy used. Defaults to 'keystone'.
 # [*live_migration*]
 #   Specify if the compute node will have the live migration enabled
 # [*live_migration_type*]
@@ -25,6 +46,9 @@
 # [*purge_nova_config*]
 #   Specifies if the nova_config file will only have values configured with
 #   puppet.
+# [*verbose*]
+#   Rather to print more verbose output. Optional. Defaults to false.
+# [*debug*]
 #
 # == Examples
 #
@@ -45,15 +69,17 @@ class openstack_hyper_v (
   $nova_compute              = true,
   # General
   $network_manager           = 'nova.network.manager.FlatDHCPManager',
-  $rabbit_host,
-  $rabbit_port,
-  $rabbit_user,
-  $rabbit_password,
+  $rabbit_host               = 'localhost',
+  $rabbit_port               = '5672',
+  $rabbit_userid             = 'guest',
+  $rabbit_password           = 'guest',
   $rabbit_virtual_host       = '/',
-  $glance_api_servers        = 'localhost:9393',
+  $image_service             = 'nova.image.glance.GlanceImageService',
+  $glance_api_servers        = 'localhost:9292',
   $instances_path            = 'C:\OpenStack\instances',
   $mkisofs_cmd               = undef,
   $qemu_img_cmd              = undef,
+  $auth_strategy             = 'keystone',
   # Live Migration
   $live_migration            = false,
   $live_migration_type       = 'Kerberos',
@@ -113,19 +139,19 @@ class openstack_hyper_v (
     # Network
     'DEFAULT/network_manager':                        value => $network_manager;
     # Rabbit
-    'DEFAULT/rabbit_userid':                          value => $rabbit_user;
+    'DEFAULT/rabbit_userid':                          value => $rabbit_userid;
     'DEFAULT/rabbit_password':                        value => $rabbit_password;
     'DEFAULT/rabbit_virtual_host':                    value => $rabbit_virtual_host;
     'DEFAULT/rabbit_host':                            value => $rabbit_host;
     'DEFAULT/rabbit_port':                            value => $rabbit_port;
     # Glance
-    'DEFAULT/image_service':                          value => 'nova.image.glance.GlanceImageService';
+    'DEFAULT/image_service':                          value => $image_service;
     'DEFAULT/glance_api_servers':                     value => $glance_api_servers;
     # General  
     'DEFAULT/logdir':                                 value => 'C:\OpenStack\Log';
     'DEFAULT/verbose':                                value => $verbose;
     'DEFAULT/debug':                                  value => $debug;
-    'DEFAULT/auth_strategy':                          value => 'keystone';
+    'DEFAULT/auth_strategy':                          value => $auth_strategy;
     'DEFAULT/volume_api_class':                       value => 'nova.volume.cinder.API';
     'DEFAULT/rpc_backend':                            value => 'nova.openstack.common.rpc.impl_kombu';
     'DEFAULT/use_cow_images':                         value => 'true';
