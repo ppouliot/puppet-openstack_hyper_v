@@ -67,13 +67,16 @@
 class openstack_hyper_v (
   # Services
   $nova_compute              = true,
-  # General
+  # Network
   $network_manager           = 'nova.network.manager.FlatDHCPManager',
+  # Rabbit
+  $rabbit_hosts              = false,
   $rabbit_host               = 'localhost',
   $rabbit_port               = '5672',
   $rabbit_userid             = 'guest',
   $rabbit_password           = 'guest',
   $rabbit_virtual_host       = '/',
+  #General
   $image_service             = 'nova.image.glance.GlanceImageService',
   $glance_api_servers        = 'localhost:9292',
   $instances_path            = 'C:\OpenStack\instances',
@@ -138,12 +141,6 @@ class openstack_hyper_v (
   nova_config {
     # Network
     'DEFAULT/network_manager':                        value => $network_manager;
-    # Rabbit
-    'DEFAULT/rabbit_userid':                          value => $rabbit_userid;
-    'DEFAULT/rabbit_password':                        value => $rabbit_password;
-    'DEFAULT/rabbit_virtual_host':                    value => $rabbit_virtual_host;
-    'DEFAULT/rabbit_host':                            value => $rabbit_host;
-    'DEFAULT/rabbit_port':                            value => $rabbit_port;
     # Glance
     'DEFAULT/image_service':                          value => $image_service;
     'DEFAULT/glance_api_servers':                     value => $glance_api_servers;
@@ -169,6 +166,26 @@ class openstack_hyper_v (
     'DEFAULT/mkisofs_cmd':                            value => $mkisofs_cmd;
     'DEFAULT/qemu_img_cmd':                           value => $qemu_img_cmd;
     'DEFAULT/compute_driver':                         value => 'nova.virt.hyperv.driver.HyperVDriver';
+  }
+
+  nova_config {
+    'DEFAULT/rabbit_password':     value => $rabbit_password;
+    'DEFAULT/rabbit_userid':       value => $rabbit_userid;
+    'DEFAULT/rabbit_virtual_host': value => $rabbit_virtual_host;
+  }
+
+  if $rabbit_hosts {
+    nova_config {
+      'DEFAULT/rabbit_hosts':     value => join($rabbit_hosts, ',');
+      'DEFAULT/rabbit_ha_queues': value => true;
+    }
+  } else {
+    nova_config {
+      'DEFAULT/rabbit_host':      value => $rabbit_host;
+      'DEFAULT/rabbit_port':      value => $rabbit_port;
+      'DEFAULT/rabbit_hosts':     value => "${rabbit_host}:${rabbit_port}";
+      'DEFAULT/rabbit_ha_queues': value => false;
+    }
   }
 
   class { 'openstack_hyper_v::nova_dependencies':
