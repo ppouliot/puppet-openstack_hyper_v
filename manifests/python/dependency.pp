@@ -39,7 +39,11 @@ define openstack_hyper_v::python::dependency (
     egg: {
       if $source == undef {
         if $remote_url == undef {
-          $source_real = $name
+          if $version != latest {
+			 $source_real = "$name==$version"
+		   } else {
+		     $source_real = $name
+		     }
         } else {        
           $source_real = "${::temp}\\${title}.${type}"
           openstack_hyper_v::base::remote_file{ $source_real:
