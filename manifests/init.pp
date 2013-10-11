@@ -199,7 +199,8 @@ class openstack_hyper_v (
   }
 
   openstack_hyper_v::python::windows_service { 'nova-compute':
-    description => 'OpenStack Nova compute service for Hyper-V',
+    ensure      => present,
+	description => 'OpenStack Nova compute service for Hyper-V',
     start       => auto,
     arguments   => '--config-file=C:\OpenStack\etc\nova.conf',
     script      => 'C:\OpenStack\scripts\NovaComputeWindowsService.NovaComputeWindowsService',
