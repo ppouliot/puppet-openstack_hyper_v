@@ -50,12 +50,6 @@ define openstack_hyper_v::python::windows_service (
     require => Exec["create-python-${name}-windows-service"],
   }
 
-  registry_key { "HKLM\\System\\CurrentControlSet\\Services\\${name}\\PythonClass":
-    ensure  => $ensure,
-    require => [Exec["create-python-${name}-windows-service"],
-	            Registry_key["HKLM\\System\\CurrentControlSet\\Services\\${name}"],],
-  }
-  
   registry_value { "HKLM\\System\\CurrentControlSet\\Services\\${name}\\PythonClass\\":
     ensure  => $ensure,
     type    => string,
