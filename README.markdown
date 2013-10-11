@@ -33,7 +33,6 @@ To configure openstack_hyper_v compute on a windows/hyper-v server
       verbose                   => false,
       debug                     => false,
       nova_compute              => true,
-      nova_source               => 'H:\Shared\openstack\nova-2013.1.2-py2.7.egg',
       mkisofs_cmd               => 'H:\Shared\openstack\tools\mkisofs.exe',
       qemu_img_cmd              => 'H:\Shared\openstack\tools\qemu-img.exe';
     }

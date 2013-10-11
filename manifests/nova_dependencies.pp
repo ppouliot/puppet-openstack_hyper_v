@@ -1,8 +1,4 @@
-class openstack_hyper_v::nova_dependencies 
-(
-  $py_nova_source,
-  $py_nova_url = undef,
-) inherits openstack_hyper_v::params {
+class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
 
   Class['openstack_hyper_v::python::install'] -> Openstack_hyper_v::Python::Dependency<| |>
 
@@ -392,39 +388,4 @@ class openstack_hyper_v::nova_dependencies
     remote_url => $py_pyopenssl_url,
     type       => egg,
   }
-
-  openstack_hyper_v::python::dependency{ 'nova':
-    source     => $py_nova_source,
-    remote_url => $py_nova_url,
-    type       => egg,
-    require    => [Openstack_hyper_v::Python::Dependency['SQLAlchemy'],
-                   Openstack_hyper_v::Python::Dependency['Cheetah'],
-                   Openstack_hyper_v::Python::Dependency['amqplib'],
-                   Openstack_hyper_v::Python::Dependency['anyjson'],
-                   Openstack_hyper_v::Python::Dependency['boto'],
-                   Openstack_hyper_v::Python::Dependency['eventlet'],
-                   Openstack_hyper_v::Python::Dependency['kombu'],
-                   Openstack_hyper_v::Python::Dependency['lxml'],
-                   Openstack_hyper_v::Python::Dependency['Routes'],
-                   Openstack_hyper_v::Python::Dependency['WebOb'],
-                   Openstack_hyper_v::Python::Dependency['greenlet'],
-                   Openstack_hyper_v::Python::Dependency['PasteDeploy'],
-                   Openstack_hyper_v::Python::Dependency['Paste'],
-                   Openstack_hyper_v::Python::Dependency['sqlalchemy-migrate'],
-                   Openstack_hyper_v::Python::Dependency['netaddr'],
-                   Openstack_hyper_v::Python::Dependency['suds'],
-                   Openstack_hyper_v::Python::Dependency['paramiko'],
-                   Openstack_hyper_v::Python::Dependency['pyasn1'],
-                   Openstack_hyper_v::Python::Dependency['Babel'],
-                   Openstack_hyper_v::Python::Dependency['iso8601'],
-                   Openstack_hyper_v::Python::Dependency['httplib2'],
-                   Openstack_hyper_v::Python::Dependency['setuptools-git'],
-                   Openstack_hyper_v::Python::Dependency['python-cinderclient'],
-                   Openstack_hyper_v::Python::Dependency['python-quantumclient'],
-                   Openstack_hyper_v::Python::Dependency['python-glanceclient'],
-                   Openstack_hyper_v::Python::Dependency['stevedore'],
-                   Openstack_hyper_v::Python::Dependency['websockify'],
-                   Openstack_hyper_v::Python::Dependency['oslo.config'],],
-  }
 }
-
