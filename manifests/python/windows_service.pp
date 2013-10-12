@@ -35,6 +35,7 @@ define openstack_hyper_v::python::windows_service (
   $description  = "",
   $start        = automatic,
   $arguments    = "",
+  $ensure       = present,
   $script,
 ){
 
