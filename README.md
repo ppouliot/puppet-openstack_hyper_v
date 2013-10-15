@@ -37,20 +37,6 @@ To configure openstack_hyper_v compute on a windows/hyper-v server
       qemu_img_cmd              => 'H:\Shared\openstack\tools\qemu-img.exe';
     }
 
-Windows Features
-----------------
-
-To enable a windows feature
-
-  openstack_hyper_v::base::windows_feature {'Windows-Feature-Name':
-     ensure  => present,
-  }
-
-To remove a windows feature
-
-  openstack_hyper_v::base::windows_feature {'Windows-Feature-Name':
-     ensure  => absent,
-  }
 
 Contributors
 ------------
