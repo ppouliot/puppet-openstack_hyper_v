@@ -41,8 +41,6 @@
 #   IP address of the physical adapter where the switch will be bound
 # [*virtual_switch_os_managed*]
 #   Specifies if the management OS is to have access to the physical adapter
-# [*nova_source*]
-#   System path to egg distribution of nova
 # [*purge_nova_config*]
 #   Specifies if the nova_config file will only have values configured with
 #   puppet.
@@ -59,7 +57,6 @@
 #    virtual_switch_name       => 'br100',
 #    virtual_switch_address    => '192.168.1.133',
 #    virtual_switch_os_managed => true,
-#    nova_source               => 'F:\Shared\Software\OpenStack\nova-2013.1.2-py2.7.egg'
 #  }
 #
 # == Authors
@@ -92,7 +89,6 @@ class openstack_hyper_v (
   $virtual_switch_address    = $::ipaddress,
   $virtual_switch_os_managed = true,
   # Others
-  $nova_source,
   $purge_nova_config         = true,
   $verbose                   = false,
   $debug                     = false
@@ -188,8 +184,27 @@ class openstack_hyper_v (
     }
   }
 
-  class { 'openstack_hyper_v::nova_dependencies':
-    py_nova_source => $nova_source,
+  class { 'openstack_hyper_v::nova_dependencies': }
+
+  class { 'windows_git': }
+
+  $nova_version = '2013.1.3'
+
+  vcsrepo { "${::temp}\\nova-clone":
+    ensure   => present,
+    provider => git,
+    source   => 'https://github.com/openstack/nova',
+    revision => $nova_version,
+    require  => Class['windows_git'],
+  }
+
+  exec { 'install-nova-from-source':
+    command  => 'python.exe setup.py install',
+    unless   => "\$output = pip freeze; exit !(\$output.Contains('nova==${nova_version}'))",
+    cwd      => "${::temp}\\nova-clone",
+    provider => powershell,
+    require  => [Vcsrepo["${::temp}\\nova-clone"],
+                 Class['openstack_hyper_v::nova_dependencies']],
   }
 
   file { 'C:/OpenStack/scripts/NovaComputeWindowsService.py':
@@ -207,7 +222,7 @@ class openstack_hyper_v (
                     Class['openstack_hyper_v::base::hyper_v'],
                     Class['openstack_hyper_v::base::live_migration'],
                     Virtual_switch[$virtual_switch_name],
-                    Class['openstack_hyper_v::nova_dependencies'],],
+                    Exec['install-nova-from-source'],],
   }
 
   if $nova_compute {
