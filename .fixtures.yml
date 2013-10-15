@@ -1,9 +1,13 @@
 fixtures:
   repositories:
-    powershell:   git://github.com/joshcooper/puppetlabs-powershell.git
-    registry:     git://github.com/puppetlabs/puppetlabs-registry.git
-    inifile:      git://github.com/cprice-puppet/puppetlabs-inifile.git
-    windows_path: git://github.com/basti1302/puppet-windows-path.git    
-    stdlib:       git://github.com/puppetlabs/puppetlabs-stdlib.git
+    powershell:     git://github.com/joshcooper/puppetlabs-powershell.git
+    registry:       git://github.com/puppetlabs/puppetlabs-registry.git
+    inifile:        git://github.com/cprice-puppet/puppetlabs-inifile.git
+    windows_path:   git://github.com/basti1302/puppet-windows-path.git    
+    stdlib:         git://github.com/puppetlabs/puppetlabs-stdlib.git
+    vcsrepo:        git://github.com/puppetlabs/puppetlabs-vcsrepo.git
+    hyper_v:        git://github.com/openstack-hyper-v/puppet-hyper_v.git
+    windows_common: git://github.com/openstack-hyper-v/puppet-windows_common.git
+    windows_git:    git://github.com/openstack-hyper-v/puppet-windows_git.git
   symlinks:
     openstack_hyper_v: "#{source_dir}"
