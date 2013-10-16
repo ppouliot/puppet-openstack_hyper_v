@@ -213,7 +213,7 @@ class openstack_hyper_v (
     require => Class['openstack_hyper_v::openstack::folders'],
   }
 
-  openstack_hyper_v::python::windows_service { 'nova-compute':
+  windows_python::windows_service { 'nova-compute':
     description => 'OpenStack Nova compute service for Hyper-V',
     start       => auto,
     arguments   => '--config-file=C:\OpenStack\etc\nova.conf',
@@ -236,6 +236,6 @@ class openstack_hyper_v (
     ensure     => $service_state,
     enable     => true,
     hasrestart => true,
-    require    => Openstack_hyper_v::Python::Windows_service['nova-compute'],
+    require    => Windows_python::Windows_service['nova-compute'],
   }
 }
