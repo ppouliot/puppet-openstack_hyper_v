@@ -3,11 +3,6 @@ require 'spec_helper'
 describe 'openstack_hyper_v', :type => :class do
 
   context "On Windows platforms" do
-    let :params do
-      {
-        :nova_source => 'G:\Fake\nova.egg',
-      }
-    end
 
     let :facts do
       {
@@ -23,7 +18,6 @@ describe 'openstack_hyper_v', :type => :class do
   context "On Windows platforms with a Virtual Switch name specified" do
     let :params do
       {
-        :nova_source => 'G:\Fake\nova.egg',
         :virtual_switch_name => 'virtual_switch_name'
       }
     end
@@ -40,11 +34,6 @@ describe 'openstack_hyper_v', :type => :class do
   end
 
   context "On an unsupported OS" do
-    let :params do
-      {
-        :nova_source => '/var/tmp/nova.egg'
-      }
-    end
 
     let :facts do
       {
