@@ -66,7 +66,7 @@ class openstack_hyper_v::python::install(
   if $python_source == undef {
     $python_source_real = $::openstack_hyper_v::python::params::python_source
 
-    openstack_hyper_v::base::remote_file{'python.msi':
+    windows_common::remote_file{'python.msi':
       source      => $python_remote,
       destination => $python_source_real,
       before      => Package[$python_package],
@@ -78,7 +78,7 @@ class openstack_hyper_v::python::install(
   if $easyinstall_source == undef {
     $easyinstall_source_real = $::openstack_hyper_v::python::params::easyinstall_source
 
-    openstack_hyper_v::base::remote_file{'ez_setup.py':
+    windows_common::remote_file{'ez_setup.py':
       source      => $easyinstall_remote,
       destination => $easyinstall_source_real,
       before      => Exec['install-ez'],
@@ -90,7 +90,7 @@ class openstack_hyper_v::python::install(
   if $pip_source == undef {
     $pip_source_real = $::openstack_hyper_v::python::params::pip_source
 
-    openstack_hyper_v::base::remote_file{'get-pip.py':
+    windows_common::remote_file{'get-pip.py':
       source      => $pip_remote,
       destination => $pip_source_real,
       before      => Exec['install-pip'],

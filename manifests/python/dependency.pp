@@ -46,7 +46,7 @@ define openstack_hyper_v::python::dependency (
 		     }
         } else {        
           $source_real = "${::temp}\\${title}.${type}"
-          openstack_hyper_v::base::remote_file{ $source_real:
+          windows_common::remote_file{ $source_real:
             source      => $remote_url,
             destination => $source_real,
             before      => Exec["egg-python-dependency-${name}"],
@@ -65,7 +65,7 @@ define openstack_hyper_v::python::dependency (
     exe: {
       if $source == undef {
         $source_real = "${::temp}\\${title}.${type}"
-        openstack_hyper_v::base::remote_file{ $source_real:
+        windows_common::remote_file{ $source_real:
           source      => $remote_url,
           destination => $source_real,
           before      => Openstack_hyper_v::Base::Extract_file["exe-installer-extract-${name}"],
@@ -113,7 +113,7 @@ define openstack_hyper_v::python::dependency (
     msi: {
       if $source == undef {
         $source_real = "${::temp}\\${title}.${type}"
-        openstack_hyper_v::base::remote_file{ $source_real:
+        windows_common::remote_file{ $source_real:
           source      => $remote_url,
           destination => $source_real,
           before      => Package[$name],
