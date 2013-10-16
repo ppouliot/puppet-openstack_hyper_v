@@ -105,13 +105,13 @@ class openstack_hyper_v (
     require => Class['openstack_hyper_v::openstack::folders'],
   }
 
-  class { 'openstack_hyper_v::base::hyper_v': }
+  class { 'hyper_v': }
 
-  class { 'openstack_hyper_v::base::live_migration':
+  class { 'hyper_v::live_migration':
     enable              => $live_migration,
     authentication_type => $live_migration_type,
     allowed_networks    => $live_migration_networks,
-    require             => Class['openstack_hyper_v::base::hyper_v'],
+    require             => Class['hyper_v'],
   }
 
   virtual_switch { $virtual_switch_name:
@@ -119,7 +119,7 @@ class openstack_hyper_v (
     interface_address => $virtual_switch_address,
     type              => External,
     os_managed        => $virtual_switch_os_managed,
-    require           => Class['openstack_hyper_v::base::hyper_v'],
+    require           => Class['hyper_v'],
   }  
 
   if ! defined( Resources[nova_config] ) {
@@ -213,14 +213,14 @@ class openstack_hyper_v (
     require => Class['openstack_hyper_v::openstack::folders'],
   }
 
-  openstack_hyper_v::python::windows_service { 'nova-compute':
+  windows_python::windows_service { 'nova-compute':
     description => 'OpenStack Nova compute service for Hyper-V',
     start       => auto,
     arguments   => '--config-file=C:\OpenStack\etc\nova.conf',
     script      => 'C:\OpenStack\scripts\NovaComputeWindowsService.NovaComputeWindowsService',
     require     => [File['C:/OpenStack/scripts/NovaComputeWindowsService.py'],
-                    Class['openstack_hyper_v::base::hyper_v'],
-                    Class['openstack_hyper_v::base::live_migration'],
+                    Class['hyper_v'],
+                    Class['hyper_v::live_migration'],
                     Virtual_switch[$virtual_switch_name],
                     Exec['install-nova-from-source'],],
   }
@@ -236,6 +236,6 @@ class openstack_hyper_v (
     ensure     => $service_state,
     enable     => true,
     hasrestart => true,
-    require    => Openstack_hyper_v::Python::Windows_service['nova-compute'],
+    require    => Windows_python::Windows_service['nova-compute'],
   }
 }
