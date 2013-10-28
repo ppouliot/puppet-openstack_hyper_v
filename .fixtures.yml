@@ -9,5 +9,7 @@ fixtures:
     hyper_v:        git://github.com/openstack-hyper-v/puppet-hyper_v.git
     windows_common: git://github.com/openstack-hyper-v/puppet-windows_common.git
     windows_git:    git://github.com/openstack-hyper-v/puppet-windows_git.git
+    windows_python: git://github.com/openstack-hyper-v/puppet-windows_python.git
+    windows_7zip:   git://github.com/openstack-hyper-v/puppet-windows_7zip.git
   symlinks:
     openstack_hyper_v: "#{source_dir}"
