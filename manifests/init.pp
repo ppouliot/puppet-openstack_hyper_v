@@ -117,7 +117,7 @@ class openstack_hyper_v (
   virtual_switch { $virtual_switch_name:
     notes             => 'OpenStack Compute Virtual Switch',
     interface_address => $virtual_switch_address,
-    type              => External,
+    type              => 'External',
     os_managed        => $virtual_switch_os_managed,
     require           => Class['hyper_v'],
   }  
