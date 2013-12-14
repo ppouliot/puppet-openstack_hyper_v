@@ -1,7 +1,9 @@
 class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
 
-  Class['windows_python'] -> Windows_python::Dependency<| |>
-
+  Class['windows_python'] -> Class['mingw'] -> Windows_python::Dependency<| |>
+  
+  class { 'mingw': }
+   
   class { 'windows_python': 
     python_source      => $python_source,
     python_installdir  => $python_installdir,
