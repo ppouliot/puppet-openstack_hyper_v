@@ -94,7 +94,7 @@ class openstack_hyper_v::params {
   $py_suds_version                  = '0.4'
 
   $py_paramiko_source               = undef
-  $py_paramiko_version              = latest
+  $py_paramiko_version              = '1.12.0'
 
   $py_pyasn1_source                 = undef
   $py_pyasn1_version                = latest
