@@ -174,4 +174,7 @@ class openstack_hyper_v::params {
 
   $py_pyopenssl_source              = undef
   $py_pyopenssl_url                 = undef
+  
+  $py_virtualenv_source             = undef
+  $py_virtualenv_version            = undef
 }
