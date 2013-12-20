@@ -83,7 +83,13 @@ class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
     version    => $py_lxml_version,
     type       => exe,
   }
-
+  
+  windows_python::dependency{ 'virtualenv':
+    source  => $py_virtualenv_source,
+    version => $py_virtualenv_version,
+    type    => pip,
+  }
+  
   windows_python::dependency{ 'eventlet':
     source  => $py_eventlet_source,
     version => $py_eventlet_version,
