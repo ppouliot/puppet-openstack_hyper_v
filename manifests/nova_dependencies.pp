@@ -417,8 +417,9 @@ class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
   }
 
   windows_python::dependency{ 'pyopenssl':
-    source     => $py_pyopenssl_source,
     remote_url => $py_pyopenssl_url,
-    type       => egg,
+    source     => $py_pyopenssl_source,
+    version    => $py_pyopenssl_version,
+    type       => exe,
   }
 }
