@@ -11,31 +11,6 @@ class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
     pip_source         => $pip_source,
   }
 
-  mingw::dependency{ 'gcc':
-    remote_url => undef,
-    source     => undef,
-    version    => undef,
-  }
-
-  mingw::dependency{ 'g++':
-    remote_url => undef,
-    source     => undef,
-    version    => undef,
-  }
-
-  mingw::dependency{ 'mingw32-make':
-    remote_url => undef,
-    source     => undef,
-    version    => undef,
-  }
-
-  mingw::dependency{ 'libtool':
-    remote_url => undef,
-    source     => undef,
-    version    => undef,
-  }
-
-
   windows_python::dependency{ 'M2Crypto':
     remote_url => $py_m2crypto_url,
     source     => $py_m2crypto_source,
