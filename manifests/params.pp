@@ -40,7 +40,7 @@ class openstack_hyper_v::params {
   $py_webob_version                 = '1.2.3'
 
   $py_netaddr_source                = undef
-  $py_netaddr_version               = '0.7.6'
+  $py_netaddr_version               = '0.7.10'
 
   $py_paste_source                  = undef
   $py_paste_version                 = latest
@@ -169,12 +169,13 @@ class openstack_hyper_v::params {
   $py_pyparsing_source              = undef
   $py_pyparsing_version             = '1.5.7'
 
-  $py_cliff_source                  = undef
+  $py_cliff_source                  = unetndef
   $py_cliff_version                 = '1.4'
 
   $py_pyopenssl_source              = undef
-  $py_pyopenssl_url                 = undef
-  
+  $py_pyopenssl_url                 = 'https://pypi.python.org/packages/2.7/p/pyOpenSSL/pyOpenSSL-0.13.1.win32-py2.7.exe'
+  $py_openssl_version               = '0.13.1'
+
   $py_virtualenv_source             = undef
   $py_virtualenv_version            = undef
 }
