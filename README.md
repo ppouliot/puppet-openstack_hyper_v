@@ -16,7 +16,7 @@ To configure openstack_hyper_v compute on a windows/hyper-v server
       # Rabbit
       rabbit_host               => 'rabbit',
       rabbit_password           => hiera('rabbit_password'),
-      rabbit_user               => 'nova',
+      rabbit_userid             => 'nova',
       rabbit_virtual_host       => '/',
       # Glance
       glance_api_servers        => '192.168.0.120:9393',
