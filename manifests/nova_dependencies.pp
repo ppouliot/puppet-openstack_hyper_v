@@ -388,7 +388,8 @@ class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
     type    => pip,
     require => [Windows_python::Dependency['prettytable'], 
                 Windows_python::Dependency['cmd2'],
-                Windows_python::Dependency['pyparsing'],],
+                Windows_python::Dependency['pyparsing'],
+                Windows_python::Dependency['pbr'],],
   }
 
   windows_python::dependency{ 'pyopenssl':
