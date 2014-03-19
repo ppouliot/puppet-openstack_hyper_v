@@ -112,7 +112,7 @@ class openstack_hyper_v::params {
   $py_d2to1_version                 = '0.2.10'
 
   $py_pbr_source                    = undef
-  $py_pbr_version                   = latest
+  $py_pbr_version                   = '0.6'
 
   $py_requests_source               = undef
   $py_requests_version              = '1.1.0'
