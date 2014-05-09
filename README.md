@@ -44,6 +44,7 @@ Contributors
  * Peter Pouliot <peter@pouliot.net>
  * Octavian Ciuhandu <ociuhandu@cloudbasesolutions.com>
  * Luis Fernandez Alvarez <luis.fernandez.alvarez@cern.ch>
+ * Vijay Tripathi <vijayt@microsoft.com>
 
 
 Copyright and License
