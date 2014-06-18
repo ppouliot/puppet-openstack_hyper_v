@@ -7,7 +7,8 @@ class openstack_hyper_v::params {
 
   # Python dependencies
   $py_m2crypto_version              = '0.21.1'
-  $py_m2crypto_url                  = 'http://chandlerproject.org/pub/Projects/MeTooCrypto/M2Crypto-0.21.1.win32-py2.7.exe'
+#  $py_m2crypto_url                  = 'http://chandlerproject.org/pub/Projects/MeTooCrypto/M2Crypto-0.21.1.win32-py2.7.exe'
+  $py_m2crypto_url                  = 'http://10.21.7.22/hv-files/M2Crypto-0.21.1.exe'
   $py_m2crypto_source               = undef
 
   $py_mysql_version                 = '1.2.3'
