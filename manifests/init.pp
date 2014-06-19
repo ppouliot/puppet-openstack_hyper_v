@@ -148,7 +148,6 @@ class openstack_hyper_v (
     'DEFAULT/volume_api_class':                       value => 'nova.volume.cinder.API';
     'DEFAULT/rpc_backend':                            value => 'nova.openstack.common.rpc.impl_kombu';
     'DEFAULT/use_cow_images':                         value => 'true';
-    'DEFAULT/force_config_drive':                     value => 'false';
     'DEFAULT/config_drive_inject_password':           value => 'false';
     'DEFAULT/policy_file':                            value => 'C:\OpenStack\etc\policy.json';
     'DEFAULT/allow_resize_to_same_host':              value => 'true';
