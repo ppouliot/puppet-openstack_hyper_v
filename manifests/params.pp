@@ -59,7 +59,7 @@ class openstack_hyper_v::params {
   $py_wmi_version                   = latest
 
   $py_sqlalchemy_source             = undef
-  $py_sqlalchemy_version            = '0.9.7'
+  $py_sqlalchemy_version            = latest
 
   $py_decorator_source              = undef
   $py_decorator_version             = '3.4.0'
