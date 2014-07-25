@@ -175,7 +175,7 @@ class openstack_hyper_v::params {
 
   $py_pyopenssl_source              = undef
   $py_pyopenssl_url                 = 'https://pypi.python.org/packages/2.7/p/pyOpenSSL/pyOpenSSL-0.13.1.win32-py2.7.exe'
-  $py_openssl_version               = '0.13.1'
+  $py_pyopenssl_version             = '0.13.1'
 
   $py_virtualenv_source             = undef
   $py_virtualenv_version            = undef
