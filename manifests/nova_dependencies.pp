@@ -297,7 +297,8 @@ class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
                 Windows_python::Dependency['requests'],
                 Windows_python::Dependency['simplejson'],
                 Windows_python::Dependency['six'],
-                Windows_python::Dependency['oslo.config'],],
+                Windows_python::Dependency['oslo.config'],
+                Windows_python::Dependency['oslo.messaging'],],
   }
 
   windows_python::dependency{ 'python-glanceclient':
@@ -333,6 +334,12 @@ class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
   windows_python::dependency{ 'oslo.config':
     source  => $py_oslo_config_source,
     version => $py_oslo_config_version,
+    type    => pip,
+  }
+
+  windows_python::dependency{ 'oslo.messaging':
+    source  => $py_oslo_messaging_source,
+    version => $py_oslo_messaging_version,
     type    => pip,
   }
 

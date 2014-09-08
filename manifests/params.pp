@@ -11,8 +11,9 @@ class openstack_hyper_v::params {
   $py_m2crypto_url                  = 'http://10.21.7.22/hv-files/M2Crypto-0.21.1.exe'
   $py_m2crypto_source               = undef
 
-  $py_mysql_version                 = '1.2.3'
-  $py_mysql_url                     = 'http://www.codegood.com/download/10/'
+  $py_mysql_version                 = latest #'1.2.3'
+  $py_mysql_url                     = 'http://10.21.7.22/hv-files/MySQL-python-1.2.5.win32-py2.7.exe'
+#  $py_mysql_url                     = undef #'http://www.codegood.com/download/10/'
   $py_mysql_source                  = undef
 
   $py_pycrypto_version              = '2.6'
@@ -23,8 +24,8 @@ class openstack_hyper_v::params {
   $py_pywin32_url                   = 'http://sourceforge.net/projects/pywin32/files/pywin32/Build%20217/pywin32-217.win32-py2.7.exe/download'
   $py_pywin32_source                = undef
 
-  $py_greenlet_version              = '0.4.0'
-  $py_greenlet_url                  = 'https://pypi.python.org/packages/2.7/g/greenlet/greenlet-0.4.0.win32-py2.7.exe#md5=910896116b1e4fd527b8afaadc7132f3'
+  $py_greenlet_version              = '0.4.3'
+  $py_greenlet_url                  = 'https://pypi.python.org/packages/2.7/g/greenlet/greenlet-0.4.3.win32-py2.7.exe'
   $py_greenlet_source               = undef
 
   $py_lxml_version                  = '2.3'
@@ -147,7 +148,10 @@ class openstack_hyper_v::params {
   $py_websockify_version            = '0.3.0'
 
   $py_oslo_config_source            = undef
-  $py_oslo_config_version           = '1.1.0'
+  $py_oslo_config_version           = '1.4.0.0a3'
+
+  $py_oslo_messaging_source         = undef
+  $py_oslo_messaging_version        = '1.4.0.0a3'
 
   $py_jsonschema_source             = undef
   $py_jsonschema_version            = '2.0.0'
@@ -165,7 +169,8 @@ class openstack_hyper_v::params {
   $py_prettytable_version           = '0.6'
 
   $py_cmd2_source                   = undef
-  $py_cmd2_version                  = '0.6.5.1'
+  $py_cmd2_version                  = latest
+#  $py_cmd2_version                  = '0.6.5.1'
 
   $py_pyparsing_source              = undef
   $py_pyparsing_version             = '1.5.7'
