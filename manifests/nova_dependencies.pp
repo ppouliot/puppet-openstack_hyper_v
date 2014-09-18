@@ -27,6 +27,7 @@ class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
     source  => $py_pbr_source,
     version => $py_pbr_version,
     type    => pip,
+    require => Windows_python::Dependency['setuptools-git'],
   }
 
   windows_python::dependency{ 'M2Crypto':
