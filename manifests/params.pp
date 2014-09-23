@@ -46,10 +46,10 @@ class openstack_hyper_v::params {
   $py_numpy_source                  = undef
 
   $py_oslo_config_source            = undef
-  $py_oslo_config_version           = '1.4.0.0a3'
+  $py_oslo_config_version           = '1.4.0'
 
   $py_oslo_messaging_source         = undef
-  $py_oslo_messaging_version        = '1.4.0.0a3'
+  $py_oslo_messaging_version        = '1.4.0'
 
   $py_pyopenssl_source              = undef
   $py_pyopenssl_url                 = 'https://pypi.python.org/packages/2.7/p/pyOpenSSL/pyOpenSSL-0.13.1.win32-py2.7.exe'
