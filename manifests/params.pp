@@ -27,8 +27,8 @@ class openstack_hyper_v::params {
   $py_pywin32_url                   = 'http://sourceforge.net/projects/pywin32/files/pywin32/Build%20217/pywin32-217.win32-py2.7.exe/download'
   $py_pywin32_source                = undef
 
-  $py_greenlet_version              = '0.4.3'
-  $py_greenlet_url                  = 'https://pypi.python.org/packages/2.7/g/greenlet/greenlet-0.4.3.win32-py2.7.exe'
+  $py_greenlet_version              = '0.4.4'
+  $py_greenlet_url                  = 'https://pypi.python.org/packages/2.7/g/greenlet/greenlet-0.4.4.win32-py2.7.exe'
   $py_greenlet_source               = undef
 
   $py_lxml_version                  = '2.3'
@@ -36,7 +36,7 @@ class openstack_hyper_v::params {
   $py_lxml_source                   = undef
 
   $py_eventlet_source               = undef
-  $py_eventlet_version              = '0.9.17'
+  $py_eventlet_version              = '0.15.2'
 
   $py_setuptools_git_source         = undef
   $py_setuptools_git_version        = '0.4.0'
@@ -49,7 +49,7 @@ class openstack_hyper_v::params {
   $py_oslo_config_version           = '1.4.0'
 
   $py_oslo_messaging_source         = undef
-  $py_oslo_messaging_version        = '1.4.0'
+  $py_oslo_messaging_version        = '1.4.1'
 
   $py_pyopenssl_source              = undef
   $py_pyopenssl_url                 = 'https://pypi.python.org/packages/2.7/p/pyOpenSSL/pyOpenSSL-0.13.1.win32-py2.7.exe'
