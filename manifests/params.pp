@@ -46,7 +46,7 @@ class openstack_hyper_v::params {
   $py_numpy_source                  = undef
 
   $py_oslo_config_source            = undef
-  $py_oslo_config_version           = '1.4.0'
+  $py_oslo_config_version           = '1.6.0'
 
   $py_oslo_messaging_source         = undef
   $py_oslo_messaging_version        = '1.4.1'
