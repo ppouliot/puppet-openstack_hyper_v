@@ -36,7 +36,7 @@ class openstack_hyper_v::params {
   $py_lxml_source                   = undef
 
   $py_eventlet_source               = undef
-  $py_eventlet_version              = '0.15.2'
+  $py_eventlet_version              = '0.16.1'
 
   $py_setuptools_git_source         = undef
   $py_setuptools_git_version        = '0.4.0'
