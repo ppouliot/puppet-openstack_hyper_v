@@ -12,7 +12,7 @@ class openstack_hyper_v::params {
   $py_m2crypto_version              = '0.21.1'
 #  $py_m2crypto_url                  = 'http://chandlerproject.org/pub/Projects/MeTooCrypto/M2Crypto-0.21.1.win32-py2.7.exe'
   $py_m2crypto_url                  = 'http://10.21.7.22/hv-files/M2Crypto-0.21.1.exe'
-  $py_m2crypto_source               = undef
+  $py_m2crypto_source        gr       = undef
 
   $py_mysql_version                 = latest #'1.2.3'
   $py_mysql_url                     = 'http://10.21.7.22/hv-files/MySQL-python-1.2.5.win32-py2.7.exe'
@@ -27,9 +27,9 @@ class openstack_hyper_v::params {
   $py_pywin32_url                   = 'http://sourceforge.net/projects/pywin32/files/pywin32/Build%20217/pywin32-217.win32-py2.7.exe/download'
   $py_pywin32_source                = undef
 
-  $py_greenlet_version              = '0.4.4'
-  $py_greenlet_url                  = 'https://pypi.python.org/packages/2.7/g/greenlet/greenlet-0.4.4.win32-py2.7.exe'
-  $py_greenlet_source               = undef
+  #$py_greenlet_version              = '0.4.4'
+  #$py_greenlet_url                  = 'https://pypi.python.org/packages/2.7/g/greenlet/greenlet-0.4.4.win32-py2.7.exe'
+  #$py_greenlet_source               = undef
 
   $py_lxml_version                  = '2.3'
   $py_lxml_url                      = 'https://pypi.python.org/packages/2.7/l/lxml/lxml-2.3.win32-py2.7.exe#md5=9c02aae672870701377750121f5a6f84'
