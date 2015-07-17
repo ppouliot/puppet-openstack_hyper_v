@@ -1,4 +1,7 @@
 class openstack_hyper_v::params {
+  # General
+  $build_from_source                = false
+
   # Python base installation
   $python_source                    = undef
   $python_installdir                = 'C:\Python27'

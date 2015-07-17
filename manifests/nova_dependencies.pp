@@ -1,8 +1,28 @@
-class openstack_hyper_v::nova_dependencies inherits openstack_hyper_v::params {
+# === Class: openstack_hyper_v::nova_dependencies
+#
+# This class is responsible of managing all the dependencies that OpenStack
+# Nova needs in order to work properly.
+#
+# === Parameters
+#
+# [*build_from_source*]
+#   Boolean value that determines if the dependencies will be compiled when
+#   necessary or installed through prebuilt packages. The default values is
+#   false. If true, MinGW is used.
+#
+# === Authors
+#
+class openstack_hyper_v::nova_dependencies (
+  $build_from_source = $::openstack_hyper_v::params::build_from_source,
+) inherits openstack_hyper_v::params {
 
-  Class['windows_python'] -> Class['mingw'] -> Windows_python::Dependency<| |>
-  
-  class { 'mingw': }
+  if $build_from_source {
+    class { 'mingw':
+      before => Class['windows_python'],
+    }
+  }
+
+  Class['windows_python'] -> Windows_python::Dependency<| |>
    
    class { 'windows_python':
     python_source      => $python_source,
