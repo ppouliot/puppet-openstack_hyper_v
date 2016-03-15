@@ -1,3 +1,4 @@
+# == Class: openstack_hyper_v::params
 class openstack_hyper_v::params {
   # Python base installation
   $python_source                    = undef
@@ -12,7 +13,7 @@ class openstack_hyper_v::params {
   $py_m2crypto_version              = '0.21.1'
 #  $py_m2crypto_url                  = 'http://chandlerproject.org/pub/Projects/MeTooCrypto/M2Crypto-0.21.1.win32-py2.7.exe'
   $py_m2crypto_url                  = 'http://10.21.7.22/hv-files/M2Crypto-0.21.1.exe'
-  $py_m2crypto_source        gr       = undef
+  $py_m2crypto_source               = undef
 
   $py_mysql_version                 = latest #'1.2.3'
   $py_mysql_url                     = 'http://10.21.7.22/hv-files/MySQL-python-1.2.5.win32-py2.7.exe'

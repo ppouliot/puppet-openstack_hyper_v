@@ -101,7 +101,7 @@ class openstack_hyper_v (
 
   file { 'C:/OpenStack/etc/policy.json':
     ensure  => file,
-    source  => "puppet:///modules/openstack_hyper_v/policy.json",
+    source  => 'puppet:///modules/openstack_hyper_v/policy.json',
     require => Class['openstack_hyper_v::openstack::folders'],
   }
 
@@ -120,7 +120,7 @@ class openstack_hyper_v (
     type              => 'External',
     os_managed        => $virtual_switch_os_managed,
     require           => Class['hyper_v'],
-  }  
+  }
 
   if ! defined( Resources[nova_config] ) {
     if $purge_nova_config {
@@ -147,17 +147,17 @@ class openstack_hyper_v (
     'DEFAULT/auth_strategy':                          value => $auth_strategy;
     'DEFAULT/volume_api_class':                       value => 'nova.volume.cinder.API';
     'DEFAULT/rpc_backend':                            value => 'nova.openstack.common.rpc.impl_kombu';
-    'DEFAULT/use_cow_images':                         value => 'true';
-    'DEFAULT/config_drive_inject_password':           value => 'false';
+    'DEFAULT/use_cow_images':                         value => true;
+    'DEFAULT/config_drive_inject_password':           value => false;
     'DEFAULT/policy_file':                            value => 'C:\OpenStack\etc\policy.json';
-    'DEFAULT/allow_resize_to_same_host':              value => 'true';
+    'DEFAULT/allow_resize_to_same_host':              value => true;
     'DEFAULT/running_deleted_instance_action':        value => 'reap';
     'DEFAULT/running_deleted_instance_poll_interval': value => 120;
     'DEFAULT/resize_confirm_window':                  value => 5;
     # Hyper-V
     'DEFAULT/vswitch_name':                           value => $virtual_switch_name;
     'DEFAULT/instances_path':                         value => $instances_path;
-    'DEFAULT/limit_cpu_features':                     value => 'false';
+    'DEFAULT/limit_cpu_features':                     value => false;
     'DEFAULT/mkisofs_cmd':                            value => $mkisofs_cmd;
     'DEFAULT/qemu_img_cmd':                           value => $qemu_img_cmd;
     'DEFAULT/compute_driver':                         value => 'nova.virt.hyperv.driver.HyperVDriver';
@@ -203,12 +203,12 @@ class openstack_hyper_v (
     cwd      => "${::temp}\\nova-clone",
     provider => powershell,
     require  => [Vcsrepo["${::temp}\\nova-clone"],
-                 Class['openstack_hyper_v::nova_dependencies']],
+                Class['openstack_hyper_v::nova_dependencies']],
   }
 
   file { 'C:/OpenStack/scripts/NovaComputeWindowsService.py':
     ensure  => file,
-    source  => "puppet:///modules/openstack_hyper_v/NovaComputeWindowsService.py",
+    source  => 'puppet:///modules/openstack_hyper_v/NovaComputeWindowsService.py',
     require => Class['openstack_hyper_v::openstack::folders'],
   }
 
@@ -231,8 +231,8 @@ class openstack_hyper_v (
   }
 
   service { 'nova-compute':
-    name       => 'nova-compute',
     ensure     => $service_state,
+    name       => 'nova-compute',
     enable     => true,
     hasrestart => true,
     require    => Windows_python::Windows_service['nova-compute'],
